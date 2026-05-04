@@ -111,34 +111,32 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= Rails.application.credentials.pg[:username] %>
-  password: <%= Rails.application.credentials.pg[:password] %>
-  host: localhost
-  port: 5432
+  username: <%= ENV.fetch("PGUSER", "postgres") %>
+  password: <%= ENV["PGPASSWORD"] %>
+  host: <%= ENV.fetch("PGHOST", "localhost") %>
+  port: <%= ENV.fetch("PGPORT", 5432) %>
 
 development:
   <<: *default
-  database: backend_development
+  database: <%= ENV.fetch("PGDATABASE", "backend_development") %>
 
 test:
   <<: *default
-  database: backend_test
+  database: <%= ENV.fetch("PGTESTDATABASE", "backend_test") %>
 
 production:
   primary: &primary_production
     <<: *default
-    database: backend_production
-    username: <%= Rails.application.credentials.pg[:username] %>
-    password: <%= Rails.application.credentials.pg[:password] %>
+    database: <%= ENV.fetch("PGPRODUCTIONDATABASE", "backend_production") %>
   cache:
     <<: *primary_production
-    database: adventure_guides_production_cache
+    database: <%= ENV.fetch("PGCACHEDATABASE", "backend_production_cache") %>
     migrations_paths: db/cache_migrate
   queue:
     <<: *primary_production
-    database: adventure_guides_production_queue
+    database: <%= ENV.fetch("PGQUEUEDATABASE", "backend_production_queue") %>
     migrations_paths: db/queue_migrate
   cable:
     <<: *primary_production
-    database: adventure_guides_production_cable
+    database: <%= ENV.fetch("PGCABLEDATABASE", "backend_production_cable") %>
     migrations_paths: db/cable_migrate
