@@ -10,6 +10,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         user: {
           id: resource.id,
           email: resource.email,
+          phone_number: resource.phone_number,
           role: resource.role
         }
       }, status: :created
@@ -22,10 +23,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def sign_up_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :role)
+    params.require(:user).permit(:email, :phone_number, :password, :password_confirmation, :role)
   end
 
   def account_update_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :current_password)
+    params.require(:user).permit(:email, :phone_number, :password, :password_confirmation, :current_password)
   end
 end
