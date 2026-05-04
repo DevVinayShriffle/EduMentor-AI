@@ -8,7 +8,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if resource.save
       render json: {
         message: 'Signed up successfully',
-        token: issue_jwt_for(resource),
+        token: "Bearer #{issue_jwt_for(resource)}",
         user: serialized_user(resource)
       }, status: :created
     else

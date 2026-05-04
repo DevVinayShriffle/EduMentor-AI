@@ -12,7 +12,7 @@ class Users::SessionsController < Devise::SessionsController
 
     render json: {
       message: 'Logged in successfully',
-      token: issue_jwt_for(user),
+      token: "Bearer #{issue_jwt_for(user)}",
       user: serialized_user(user)
     }, status: :ok
   end
