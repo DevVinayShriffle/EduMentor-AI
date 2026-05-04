@@ -10,3 +10,18 @@ html, body {
 html::-webkit-scrollbar {
   display: none;
 }
+
+:root {
+  /* Background */
+  --bg-primary: #ffffff;
+
+  /* Text (FIXED for light UI) */
+  --text-primary: #0f172a;      /* strong readable dark */
+  --text-secondary: #475569;    /* soft gray */
+
+  /* Accent */
+  --accent-primary: #3b82f6;
+
+  /* Border */
+  --border-soft: rgba(15, 23, 42, 0.08);
+}
