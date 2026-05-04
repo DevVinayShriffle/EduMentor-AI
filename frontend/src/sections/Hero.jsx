@@ -1,21 +1,76 @@
 export default function Hero() {
   return (
-    <section className="pt-28 text-center px-4 bg-gradient-to-r from-blue-50 to-white">
-      <h1 className="text-4xl md:text-6xl font-bold">
-        Learn Smarter with <span className="text-blue-600">EduMentor AI</span>
-      </h1>
+    <section
+      className="relative pt-24 md:pt-32 pb-20 px-4 text-center overflow-hidden"
+      style={{
+        background: "linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)",
+      }}
+    >
+      {/* Soft floating gradient */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(circle at top, rgba(59,130,246,0.10), transparent 60%)",
+        }}
+      />
 
-      <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-        AI-powered structured learning for 1-year & 2-year courses with live classes, recorded lectures, quizzes, and doubt solving.
-      </p>
+      <div className="relative max-w-3xl mx-auto">
 
-      <div className="mt-6 flex justify-center gap-4">
-        <button className="bg-blue-600 text-white px-6 py-2 rounded">
-          Get Started
-        </button>
-        <button className="border px-6 py-2 rounded">
-          Explore Courses
-        </button>
+        {/* Heading */}
+        <h1
+          className="text-4xl md:text-6xl font-semibold tracking-tight leading-tight"
+          style={{ color: "var(--text-primary)" }}
+        >
+          Learn Smarter with{" "}
+          <span
+            style={{
+              background: "linear-gradient(90deg, #3b82f6, #6366f1)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            EduMentor AI
+          </span>
+        </h1>
+
+        {/* Subtext */}
+        <p
+          className="mt-5 text-sm md:text-base leading-relaxed"
+          style={{ color: "var(--text-secondary)" }}
+        >
+          AI-powered structured learning for 1-year & 2-year courses with live classes,
+          recorded lectures, quizzes, and intelligent doubt solving.
+        </p>
+
+        {/* Buttons */}
+        <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3">
+
+          {/* Primary button */}
+          <button
+            className="px-6 py-2.5 rounded-md text-sm font-medium transition-all hover:scale-[1.03]"
+            style={{
+              background:
+                "linear-gradient(90deg, #3b82f6, #6366f1)",
+              color: "#fff",
+            }}
+          >
+            Get Started
+          </button>
+
+          {/* Secondary button */}
+          <button
+            className="px-6 py-2.5 rounded-md text-sm font-medium transition-all hover:bg-slate-100"
+            style={{
+              border: "1px solid var(--border-soft)",
+              color: "var(--text-primary)",
+              background: "transparent",
+            }}
+          >
+            Explore Courses
+          </button>
+
+        </div>
       </div>
     </section>
   );
