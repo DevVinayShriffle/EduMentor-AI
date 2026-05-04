@@ -3,6 +3,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   private
 
+  def sign_up(_resource_name, _resource)
+    true
+  end
+
   def respond_with(resource, _opts = {})
     if resource.persisted?
       render json: {
@@ -23,10 +27,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def sign_up_params
-    params.require(:user).permit(:email, :phone_number, :password, :password_confirmation, :role)
+    allowed_params = params.require(:user).permit(:email, :phone_number, :password, :password_confirmation, :role)
+    allowed_params[:role] = 'student' unless allowed_params[:role].in?(%w[student teacher])
+    allowed_params
   end
 
   def account_update_params
-    params.require(:user).permit(:email, :phone_number, :password, :password_confirmation, :current_password)
+    params.require(:user).permit(:phone_number, :password, :password_confirmation, :current_password)
   end
 end
