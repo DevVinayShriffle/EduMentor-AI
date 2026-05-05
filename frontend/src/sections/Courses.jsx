@@ -6,14 +6,14 @@ const courses = [
     desc: "Complete structured engineering prep",
     price: "₹19,999",
     tag: "New",
-    image: "https://images.unsplash.com/photo-1581091870620-4c4b7b1b7f2a"
+    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644"
   },
   {
     title: "NEET 2-Year Plan",
     desc: "Medical entrance preparation",
     price: "₹18,499",
     tag: "Old",
-    image: "https://images.unsplash.com/photo-1581090700227-4c4c1f0a7c77"
+    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644"
   },
   {
     title: "Foundation Course",
@@ -43,7 +43,7 @@ export default function Courses() {
   }, []);
 
   return (
-    <section id="courses" className="py-16 px-4 text-center">
+    <section id="courses" className="scroll-mt-24 py-16 px-4 text-center">
 
       {/* Heading */}
       <h2
