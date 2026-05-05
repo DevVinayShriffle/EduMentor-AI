@@ -21,7 +21,7 @@ export default function About() {
       id="about"
       className="bg-[linear-gradient(180deg,_#ffffff_0%,_#f8fbff_52%,_#eef5ff_100%)] px-4 py-20"
     >
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <div className="grid items-start gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <div className="inline-flex items-center rounded-full border border-blue-200/80 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-blue-700 shadow-sm backdrop-blur">

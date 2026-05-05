@@ -43,7 +43,7 @@ const features = [
 export default function WhyChooseUs() {
   return (
     <section id="why" className="bg-[linear-gradient(180deg,_#ffffff_0%,_#f7faff_100%)] px-4 py-20">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <div className="text-center">
           <div className="inline-flex items-center rounded-full border border-blue-200/80 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-blue-700 shadow-sm backdrop-blur">
             Why EduMentor AI

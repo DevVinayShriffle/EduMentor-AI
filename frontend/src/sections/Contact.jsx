@@ -6,7 +6,7 @@ export default function Contact() {
       id="contact"
       className="bg-[linear-gradient(180deg,_#ffffff_0%,_#f8fbff_50%,_#eef5ff_100%)] px-4 py-20"
     >
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div>
             <div className="inline-flex items-center rounded-full border border-blue-200/80 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-blue-700 shadow-sm backdrop-blur">
