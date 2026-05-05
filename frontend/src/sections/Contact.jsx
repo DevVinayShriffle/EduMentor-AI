@@ -1,3 +1,5 @@
+import logoImage from "../assets/images/edumentor-logo-no-bg.png";
+
 export default function Contact() {
   return (
     <section
@@ -8,6 +10,7 @@ export default function Contact() {
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div>
             <div className="inline-flex items-center rounded-full border border-blue-200/80 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-blue-700 shadow-sm backdrop-blur">
+              <img src={logoImage} alt="EduMentor AI logo" className="mr-2 h-5 w-auto" />
               Contact Us
             </div>
 

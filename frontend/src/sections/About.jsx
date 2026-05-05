@@ -1,3 +1,5 @@
+import logoImage from "../assets/images/edumentor-logo-no-bg.png";
+
 const pillars = [
   {
     label: "Structured Learning",
@@ -23,6 +25,7 @@ export default function About() {
         <div className="grid items-start gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <div className="inline-flex items-center rounded-full border border-blue-200/80 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-blue-700 shadow-sm backdrop-blur">
+              <img src={logoImage} alt="EduMentor AI logo" className="mr-2 h-5 w-auto" />
               About EduMentor AI
             </div>
 

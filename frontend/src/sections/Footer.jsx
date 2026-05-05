@@ -1,3 +1,5 @@
+import logoImage from "../assets/images/edumentor-logo-white-bg.png";
+
 const quickLinks = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
@@ -20,9 +22,12 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
         <div className="grid gap-12 md:grid-cols-2 xl:grid-cols-4">
           <div className="max-w-sm">
-            <h2 className="text-4xl font-bold tracking-tight text-white">
-              EduMentor<span className="text-blue-500">AI</span>
-            </h2>
+            <div className="flex items-center gap-3">
+              <img src={logoImage} alt="EduMentor AI logo" className="h-12 w-auto rounded-sm" />
+              <h2 className="text-3xl font-bold tracking-tight text-white">
+                EduMentor<span className="text-blue-500">AI</span>
+              </h2>
+            </div>
             <p className="mt-6 text-lg leading-8 text-slate-400">
               Empowering students with structured learning, live classes, AI doubt solving, and progress tracking in one modern platform.
             </p>
