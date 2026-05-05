@@ -1,5 +1,18 @@
-const quickLinks = ["Home", "How It Works", "Why Choose Us", "Courses", "Contact"];
-const supportLinks = ["Help Center", "FAQs", "Privacy Policy", "Terms of Service", "Contact Us"];
+const quickLinks = [
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Contact", href: "#contact" },
+  { label: "How It Works", href: "#how" },
+  { label: "Why Choose Us", href: "#why" },
+  { label: "Courses", href: "#courses" }
+];
+const supportLinks = [
+  { label: "Help Center", href: "#contact" },
+  { label: "FAQs", href: "#contact" },
+  { label: "Privacy Policy", href: "#contact" },
+  { label: "Terms of Service", href: "#contact" },
+  { label: "Contact Us", href: "#contact" }
+];
 
 export default function Footer() {
   return (
@@ -22,11 +35,11 @@ export default function Footer() {
             <div className="space-y-4 text-lg text-slate-400">
               {quickLinks.map((link) => (
                 <a
-                  key={link}
-                  href="#"
+                  key={link.label}
+                  href={link.href}
                   className="block transition-colors duration-200 hover:text-white"
                 >
-                  {link}
+                  {link.label}
                 </a>
               ))}
             </div>
@@ -39,11 +52,11 @@ export default function Footer() {
             <div className="space-y-4 text-lg text-slate-400">
               {supportLinks.map((link) => (
                 <a
-                  key={link}
-                  href="#"
+                  key={link.label}
+                  href={link.href}
                   className="block transition-colors duration-200 hover:text-white"
                 >
-                  {link}
+                  {link.label}
                 </a>
               ))}
             </div>

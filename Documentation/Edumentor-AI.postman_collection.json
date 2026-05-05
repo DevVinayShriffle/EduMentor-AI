@@ -1,0 +1,232 @@
+{
+  "info": {
+    "_postman_id": "3ac67951-73f1-4697-a0be-2c1c21fd6c2b",
+    "name": "EduMentor AI",
+    "description": "Postman collection for the current EduMentor AI backend API.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "jwtToken",
+      "value": ""
+    },
+    {
+      "key": "authHeader",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/up",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "up"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Signup - Student",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  const data = pm.response.json();",
+                  "  const bearer = data.token || '';",
+                  "  const jwt = bearer.replace(/^Bearer\\s+/i, '');",
+                  "  pm.collectionVariables.set('jwtToken', jwt);",
+                  "  pm.collectionVariables.set('authHeader', bearer);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"email\": \"student@example.com\",\n    \"phone_number\": \"9876543210\",\n    \"password\": \"password123\",\n    \"password_confirmation\": \"password123\",\n    \"role\": \"student\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/signup",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "signup"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Signup - Teacher",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  const data = pm.response.json();",
+                  "  const bearer = data.token || '';",
+                  "  const jwt = bearer.replace(/^Bearer\\s+/i, '');",
+                  "  pm.collectionVariables.set('jwtToken', jwt);",
+                  "  pm.collectionVariables.set('authHeader', bearer);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"email\": \"teacher@example.com\",\n    \"phone_number\": \"9876543211\",\n    \"password\": \"password123\",\n    \"password_confirmation\": \"password123\",\n    \"role\": \"teacher\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/signup",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "signup"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  const data = pm.response.json();",
+                  "  const bearer = data.token || '';",
+                  "  const jwt = bearer.replace(/^Bearer\\s+/i, '');",
+                  "  pm.collectionVariables.set('jwtToken', jwt);",
+                  "  pm.collectionVariables.set('authHeader', bearer);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"email\": \"teacher@example.com\",\n    \"password\": \"password123\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{jwtToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/logout",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,19 +1,75 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState("/");
+  const [active, setActive] = useState(window.location.hash || "#home");
+  const [isPinned, setIsPinned] = useState(false);
 
   const links = [
-    { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "Contact", path: "/contact" },
+    { name: "Home", path: "#home" },
+    { name: "About", path: "#about" },
+    { name: "Courses", path: "#courses" },
+    { name: "Contact", path: "#contact" }
   ];
+
+  useEffect(() => {
+    const sections = links
+      .map((link) => document.getElementById(link.path.replace("#", "")))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntry = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visibleEntry) {
+          setActive(`#${visibleEntry.target.id}`);
+        }
+      },
+      {
+        rootMargin: "-30% 0px -45% 0px",
+        threshold: [0.2, 0.4, 0.6]
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    const handleHashChange = () => {
+      setActive(window.location.hash || "#home");
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+      observer.disconnect();
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsPinned(window.scrollY > 24);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleNavClick = (path) => {
+    setActive(path);
+    setOpen(false);
+  };
 
   return (
     <header
-      className="w-full sticky top-0 z-50 border-b backdrop-blur-md"
+      className={`fixed left-0 z-50 w-full border-b backdrop-blur-md transition-[top,box-shadow,background-color] duration-300 ${
+        isPinned ? "top-0" : "top-[29px]"
+      }`}
       style={{
   background: "rgba(11, 11, 13, 0.18)",
   borderColor: "rgba(15, 23, 42, 0.10)",
@@ -25,12 +81,14 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 py-2">
 
         {/* Logo */}
-        <h1
+        <a
+          href="#home"
+          onClick={() => handleNavClick("#home")}
           className="text-lg sm:text-xl font-semibold tracking-tight cursor-pointer"
           style={{ color: "var(--text-primary)" }}
         >
           EduMentor<span style={{ color: "var(--accent-primary)" }}>AI</span>
-        </h1>
+        </a>
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center gap-6 text-sm">
@@ -38,7 +96,7 @@ export default function Navbar() {
             <a
               key={link.path}
               href={link.path}
-              onClick={() => setActive(link.path)}
+              onClick={() => handleNavClick(link.path)}
               className="relative pb-1 transition-colors"
               style={{
                 color:
@@ -66,7 +124,9 @@ export default function Navbar() {
         <div className="flex items-center gap-2 sm:gap-3">
 
           {/* Login */}
-          <button
+          <a
+            href="#about"
+            onClick={() => handleNavClick("#about")}
             className="hidden md:block text-xs sm:text-sm px-3 py-1.5 rounded-md transition-all hover:scale-[1.03]"
             style={{
               background:
@@ -74,8 +134,8 @@ export default function Navbar() {
               color: "#fff",
             }}
           >
-            Login
-          </button>
+            Explore
+          </a>
 
           {/* Hamburger */}
           <button
@@ -117,10 +177,7 @@ export default function Navbar() {
             <a
               key={link.path}
               href={link.path}
-              onClick={() => {
-                setActive(link.path);
-                setOpen(false);
-              }}
+              onClick={() => handleNavClick(link.path)}
               style={{
                 color:
                   active === link.path
@@ -134,16 +191,18 @@ export default function Navbar() {
           ))}
 
           {/* Login in mobile */}
-          <button
-            className="mt-4 text-sm px-3 py-2 rounded-md"
+          <a
+            href="#about"
+            onClick={() => handleNavClick("#about")}
+            className="mt-4 text-sm px-3 py-2 rounded-md text-center"
             style={{
               background:
                 "linear-gradient(90deg, #3b82f6, #6366f1)",
               color: "white",
             }}
           >
-            Login
-          </button>
+            Explore
+          </a>
         </div>
       </div>
     </header>
