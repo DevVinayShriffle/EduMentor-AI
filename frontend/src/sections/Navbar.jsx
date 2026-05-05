@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import logoImage from "../assets/images/edumentor-logo-no-bg.png";
 
-export default function Navbar() {
+export default function Navbar({
+  isAuthenticated,
+  onLoginClick,
+  onDashboardClick,
+  onLogoutClick,
+}) {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("#home");
   const [isPinned, setIsPinned] = useState(false);
@@ -163,10 +168,38 @@ export default function Navbar() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-2 sm:gap-3">
-            <a
-              href="#about"
-              onClick={(event) => handleNavClick(event, "#about")}
+        {/* Right */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {isAuthenticated ? (
+            <>
+              <button
+                type="button"
+                onClick={onDashboardClick}
+                className="hidden md:block text-xs sm:text-sm px-3 py-1.5 rounded-md transition-all hover:scale-[1.03]"
+                style={{
+                  border: "1px solid rgba(255,255,255,0.16)",
+                  color: "#fff",
+                  background: "rgba(255,255,255,0.08)",
+                }}
+              >
+                Dashboard
+              </button>
+              <button
+                type="button"
+                onClick={onLogoutClick}
+                className="hidden md:block text-xs sm:text-sm px-3 py-1.5 rounded-md transition-all hover:scale-[1.03]"
+                style={{
+                  background: "linear-gradient(90deg, #3b82f6, #6366f1)",
+                  color: "#fff",
+                }}
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <button
+              type="button"
+              onClick={onLoginClick}
               className="hidden md:block text-xs sm:text-sm px-3 py-1.5 rounded-md transition-all hover:scale-[1.03]"
               style={{
                 background:
@@ -174,8 +207,9 @@ export default function Navbar() {
                 color: "#fff",
               }}
             >
-              Explore
-            </a>
+              Login
+            </button>
+          )}
 
             <button
               type="button"
@@ -262,20 +296,59 @@ export default function Navbar() {
             </a>
           ))}
 
-          <a
-            href="#about"
-            onClick={(event) => handleNavClick(event, "#about")}
-            className="mt-4 rounded-xl px-4 py-3 text-center text-sm"
-            style={{
-              background:
-                "linear-gradient(90deg, #3b82f6, #6366f1)",
-              color: "white",
-            }}
-          >
-            Explore
-          </a>
+          {isAuthenticated ? (
+            <>
+              <button
+                type="button"
+                onClick={() => {
+                  setOpen(false);
+                  onDashboardClick();
+                }}
+                className="mt-4 text-sm px-3 py-2 rounded-md"
+                style={{
+                  background: "rgba(255,255,255,0.08)",
+                  color: "white",
+                  border: "1px solid rgba(255,255,255,0.16)",
+                }}
+              >
+                Dashboard
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setOpen(false);
+                  onLogoutClick();
+                }}
+                className="text-sm px-3 py-2 rounded-md"
+                style={{
+                  background:
+                    "linear-gradient(90deg, #3b82f6, #6366f1)",
+                  color: "white",
+                }}
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <button
+              type="button"
+              onClick={() => {
+                setOpen(false);
+                onLoginClick();
+              }}
+              className="mt-4 text-sm px-3 py-2 rounded-md"
+              style={{
+                background:
+                  "linear-gradient(90deg, #3b82f6, #6366f1)",
+                color: "white",
+              }}
+            >
+              Login
+            </button>
+          )}
         </div>
       </div>
     </>
   );
 }
+

@@ -1,4 +1,4 @@
-export default function Hero() {
+export default function Hero({ onGetStarted, onExploreCourses }) {
   return (
     <section id="home" className="relative flex min-h-dvh items-center overflow-hidden bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.14),_transparent_28%),radial-gradient(circle_at_left,_rgba(167,139,250,0.12),_transparent_28%),linear-gradient(180deg,_#ffffff_0%,_#f6f9ff_56%,_#eef4ff_100%)] px-4 pb-24 pt-28 text-center md:pt-36">
       <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent)] opacity-40" />
@@ -46,3 +46,4 @@ export default function Hero() {
     </section>
   );
 }
+
