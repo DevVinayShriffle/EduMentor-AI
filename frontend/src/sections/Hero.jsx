@@ -1,9 +1,9 @@
 export default function Hero() {
   return (
-    <section id="home" className="relative overflow-hidden bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.14),_transparent_28%),radial-gradient(circle_at_left,_rgba(167,139,250,0.12),_transparent_28%),linear-gradient(180deg,_#ffffff_0%,_#f6f9ff_56%,_#eef4ff_100%)] px-4 pb-24 pt-28 text-center md:pt-36">
+    <section id="home" className="relative flex min-h-dvh items-center overflow-hidden bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.14),_transparent_28%),radial-gradient(circle_at_left,_rgba(167,139,250,0.12),_transparent_28%),linear-gradient(180deg,_#ffffff_0%,_#f6f9ff_56%,_#eef4ff_100%)] px-4 pb-24 pt-28 text-center md:pt-36">
       <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent)] opacity-40" />
 
-      <div className="relative mx-auto max-w-6xl">
+      <div className="relative mx-auto w-full max-w-7xl">
         <div className="inline-flex items-center rounded-full border border-blue-200/80 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-blue-700 shadow-sm backdrop-blur">
           AI-Powered Learning Platform
         </div>
