@@ -7,7 +7,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable,
+         :recoverable,
          :validatable, :jwt_authenticatable,
          jwt_revocation_strategy: self
 end
