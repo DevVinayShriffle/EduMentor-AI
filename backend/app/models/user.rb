@@ -10,4 +10,6 @@ class User < ApplicationRecord
          :recoverable,
          :validatable, :jwt_authenticatable,
          jwt_revocation_strategy: self
+
+  has_many :courses, foreign_key: :user_id
 end
