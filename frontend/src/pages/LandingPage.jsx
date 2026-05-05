@@ -60,6 +60,7 @@ export default function LandingPage() {
           window.location.hash = "#courses";
         }}
       />
+      <About />
       <WhyChooseUs />
       <Courses />
       <HowItWorks />
