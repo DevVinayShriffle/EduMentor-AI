@@ -1,54 +1,93 @@
-import { useState, useEffect } from "react";
+const categoryChips = [
+  "Mathematics",
+  "Physics",
+  "Chemistry",
+  "Biology",
+  "Computer Science",
+  "English",
+  "JEE Main",
+  "JEE Advanced",
+  "NEET",
+  "UPSC",
+  "SSC",
+  "Banking",
+  "State Exams",
+  "1 Year Program",
+  "2 Year Program",
+  "Crash Course",
+  "Revision Batch",
+];
 
-const courses = [
+const featuredCourses = [
   {
-    title: "JEE 2-Year Plan",
-    desc: "Structured engineering prep with live classes, revision flow, and weekly testing.",
-    price: "₹19,999",
-    tag: "Flagship",
-    image: "https://images.unsplash.com/photo-1581091870620-4c4b7b1b7f2a"
+    title: "JEE Main 1 Year Program",
+    provider: "Exam-Based",
+    type: "1 Year Program",
+    rating: "4.9",
+    image:
+      "https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=900&q=80",
   },
   {
-    title: "NEET 2-Year Plan",
-    desc: "Medical entrance preparation designed for consistent long-term performance.",
-    price: "₹18,499",
-    tag: "Popular",
-    image: "https://images.unsplash.com/photo-1581090700227-4c4c1f0a7c77"
+    title: "NEET 2 Year Program",
+    provider: "Exam-Based",
+    type: "2 Year Program",
+    rating: "4.8",
+    image:
+      "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=900&q=80",
   },
   {
-    title: "Foundation Course",
-    desc: "Strong base-building for Class 9–10 with concept-first teaching and revision.",
-    price: "₹9,999",
-    tag: "Early Prep",
-    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644"
+    title: "Physics Revision Batch",
+    provider: "Subject-Based",
+    type: "Revision Batch",
+    rating: "4.7",
+    image:
+      "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=900&q=80",
   },
   {
-    title: "Teacher-Led Crash Track",
-    desc: "Fast-paced revision path with recorded replays, tests, and AI-backed practice.",
-    price: "₹7,499",
-    tag: "Revision",
-    image: "https://images.unsplash.com/photo-1509062522246-3755977927d7"
+    title: "Mathematics Crash Course",
+    provider: "Subject-Based",
+    type: "Crash Course",
+    rating: "4.8",
+    image:
+      "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=900&q=80",
+  },
+];
+
+const spotlightLists = [
+  {
+    title: "Most popular",
+    items: [
+      "Mathematics Mastery Program",
+      "Physics Concept Builder",
+      "Chemistry Problem Solving Batch",
+    ],
+  },
+  {
+    title: "Hot new releases",
+    items: [
+      "JEE Advanced Rank Booster",
+      "NEET Rapid Revision Batch",
+      "English Writing and Grammar Lab",
+    ],
+  },
+  {
+    title: "Trending now",
+    items: [
+      "UPSC Foundation Program",
+      "Banking Quant Crash Course",
+      "SSC Complete Test Series",
+    ],
   },
 ];
 
 export default function Courses() {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % courses.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <section id="courses" className="bg-[linear-gradient(180deg,_#eef4ff_0%,_#ffffff_100%)] px-4 py-20 text-center">
+    <section
+      id="courses"
+      className="bg-[linear-gradient(180deg,_#eef4ff_0%,_#ffffff_100%)] px-4 py-20"
+    >
       <div className="mx-auto max-w-7xl">
         <div className="text-center">
-          <div className="inline-flex items-center rounded-full border border-blue-200/80 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-blue-700 shadow-sm backdrop-blur">
-            Structured Programs
-          </div>
           <h2 className="mt-6 text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
             Courses built for long-term outcomes, not content overload.
           </h2>
@@ -56,61 +95,105 @@ export default function Courses() {
             Explore learning plans designed around timelines, revision cycles, performance checkpoints, and real academic progression.
           </p>
         </div>
-
-        <div className="mt-12 overflow-hidden">
-          <div
-            className="flex transition-transform duration-500 ease-in-out"
-            style={{
-              transform: `translateX(-${index * (100 / 3)}%)`,
-              width: `${courses.length * (100 / 3)}%`,
-            }}
-          >
-            {courses.map((c, i) => (
-              <div
-                key={i}
-                className="px-3"
-                style={{
-                  flex: "0 0 33.3333%"
-                }}
+        <div className="mt-2">
+          <p className="text-sm font-semibold text-slate-700">Explore categories</p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            {categoryChips.map((chip) => (
+              <button
+                key={chip}
+                type="button"
+                className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-blue-300 hover:text-blue-700"
               >
-                <div className="group overflow-hidden rounded-[28px] border border-white/75 bg-white/90 text-left shadow-[0_24px_60px_rgba(37,99,235,0.08)] backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_70px_rgba(37,99,235,0.14)]">
-                  <div className="relative h-48 overflow-hidden">
-                    <img
-                      src={c.image}
-                      alt={c.title}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-slate-950/60 to-transparent" />
-                  </div>
-
-                  <div className="p-4 text-left">
-                    <div className="flex items-center justify-between gap-3">
-                      <h3 className="text-lg font-semibold text-slate-950">
-                        {c.title}
-                      </h3>
-                      <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
-                        {c.tag}
-                      </span>
-                    </div>
-                    <p className="mt-3 text-sm leading-7 text-slate-600">
-                      {c.desc}
-                    </p>
-                    <div className="mt-5 flex items-center justify-between">
-                      <span className="text-base font-semibold text-slate-950">
-                        {c.price}
-                      </span>
-                      <span className="text-xs uppercase tracking-[0.2em] text-slate-400">
-                        Premium Track
-                      </span>
-                    </div>
-                    <button className="mt-5 w-full rounded-2xl bg-gradient-to-r from-blue-500 via-indigo-500 to-fuchsia-500 py-3 text-sm font-semibold text-white shadow-[0_18px_40px_rgba(79,70,229,0.22)]">
-                      View Details
-                    </button>
-                  </div>
-                </div>
-              </div>
+                {chip}
+              </button>
             ))}
           </div>
+        </div>
+
+        <div className="mt-8 overflow-hidden rounded-[32px] border border-indigo-100 bg-[linear-gradient(135deg,_#d946ef_0%,_#8b5cf6_28%,_#eef2ff_28%,_#eef2ff_100%)] shadow-[0_24px_70px_rgba(99,102,241,0.16)]">
+          <div className="grid gap-5 bg-[linear-gradient(135deg,_rgba(88,28,135,0.22)_0%,_rgba(79,70,229,0.18)_45%,_rgba(30,41,59,0.10)_100%)] p-5 lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="rounded-[24px] bg-white/12 p-6 text-left text-white backdrop-blur">
+              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-950">
+                Program Formats
+              </p>
+              <h3 className="mt-4 text-3xl font-bold leading-tight text-slate-950">
+                Choose the duration that matches your preparation intensity.
+              </h3>
+              <p className="mt-4 text-sm leading-7 text-slate-900">
+                Offer long-term 1 Year and 2 Year programs, fast-paced Crash Courses,
+                and Revision Batches for students who need a sharper short-cycle push.
+              </p>
+              <button className="mt-6 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-fuchsia-700 transition hover:bg-fuchsia-50">
+                View programs
+              </button>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              {featuredCourses.map((course) => (
+                <article
+                  key={course.title}
+                  className="flex h-full flex-col overflow-hidden rounded-[22px] border border-white/70 bg-white shadow-[0_16px_45px_rgba(37,99,235,0.08)]"
+                >
+                  <div className="h-32 overflow-hidden">
+                    <img
+                      src={course.image}
+                      alt={course.title}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col p-4 text-left">
+                    <p className="text-xs font-medium uppercase tracking-[0.2em] text-slate-400">
+                      {course.provider}
+                    </p>
+                    <h4 className="mt-2 min-h-[4.5rem] text-sm font-semibold leading-6 text-slate-950">
+                      {course.title}
+                    </h4>
+                    <p className="mt-auto pt-3 text-xs text-slate-500">{course.type}</p>
+                    <p className="mt-2 text-xs font-medium text-slate-700">
+                      ★ {course.rating}
+                    </p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-10 grid gap-4 lg:grid-cols-3">
+          {spotlightLists.map((group) => (
+            <div
+              key={group.title}
+              className="rounded-[26px] border border-blue-100 bg-white/90 p-4 shadow-[0_18px_50px_rgba(37,99,235,0.07)]"
+            >
+              <div className="mb-4 flex items-center justify-between">
+                <h3 className="text-base font-semibold text-slate-950">
+                  {group.title}
+                </h3>
+                <span className="text-sm font-medium text-blue-700">›</span>
+              </div>
+
+              <div className="space-y-3">
+                {group.items.map((item, itemIndex) => (
+                  <article
+                    key={item}
+                    className="flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50/80 p-3"
+                  >
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500 via-blue-500 to-indigo-500 text-sm font-bold text-white">
+                      {itemIndex + 1}
+                    </div>
+                    <div className="text-left">
+                      <p className="text-sm font-semibold text-slate-950">
+                        {item}
+                      </p>
+                      <p className="mt-1 text-xs text-slate-500">
+                        Guided course track
+                      </p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

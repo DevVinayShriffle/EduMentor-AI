@@ -4,7 +4,7 @@ import logoImage from "../assets/images/edumentor-logo-no-bg.png";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState(window.location.hash || "#home");
+  const [active, setActive] = useState("#home");
   const [isPinned, setIsPinned] = useState(false);
 
   const links = [
@@ -15,6 +15,10 @@ export default function Navbar() {
   ];
 
   useEffect(() => {
+    if (window.location.hash) {
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
+
     const sections = links
       .map((link) => document.getElementById(link.path.replace("#", "")))
       .filter(Boolean);
@@ -37,16 +41,9 @@ export default function Navbar() {
 
     sections.forEach((section) => observer.observe(section));
 
-    const handleHashChange = () => {
-      setActive(window.location.hash || "#home");
-    };
-
-    window.addEventListener("hashchange", handleHashChange);
-
     return () => {
       sections.forEach((section) => observer.unobserve(section));
       observer.disconnect();
-      window.removeEventListener("hashchange", handleHashChange);
     };
   }, []);
 
@@ -78,9 +75,29 @@ export default function Navbar() {
     };
   }, [open]);
 
-  const handleNavClick = (path) => {
+  const scrollToSection = (path) => {
+    const section = document.getElementById(path.replace("#", ""));
+
+    if (!section) {
+      return;
+    }
+
+    const navbarOffset = 50;
+    // const topOffset = mainHeaderOffset + navbarOffset;
+    const sectionTop = section.getBoundingClientRect().top + window.scrollY - navbarOffset;
+
+    window.scrollTo({
+      top: Math.max(sectionTop, 0),
+      behavior: "smooth",
+    });
+  };
+
+  const handleNavClick = (event, path) => {
+    event.preventDefault();
     setActive(path);
     setOpen(false);
+    window.history.replaceState(null, "", window.location.pathname + window.location.search);
+    scrollToSection(path);
   };
 
   const closeMobileMenu = () => {
@@ -110,7 +127,7 @@ export default function Navbar() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
           <a
             href="#home"
-            onClick={() => handleNavClick("#home")}
+            onClick={(event) => handleNavClick(event, "#home")}
             className="flex cursor-pointer items-center gap-2 whitespace-nowrap text-lg font-semibold tracking-tight sm:text-xl"
             style={{ color: "#0f172a" }}
           >
@@ -123,7 +140,7 @@ export default function Navbar() {
               <a
                 key={link.path}
                 href={link.path}
-                onClick={() => handleNavClick(link.path)}
+                onClick={(event) => handleNavClick(event, link.path)}
                 className="relative pb-1 transition-colors"
                 style={{
                   color:
@@ -149,7 +166,7 @@ export default function Navbar() {
           <div className="flex items-center gap-2 sm:gap-3">
             <a
               href="#about"
-              onClick={() => handleNavClick("#about")}
+              onClick={(event) => handleNavClick(event, "#about")}
               className="hidden md:block text-xs sm:text-sm px-3 py-1.5 rounded-md transition-all hover:scale-[1.03]"
               style={{
                 background:
@@ -206,7 +223,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between border-b px-5 py-4">
           <a
             href="#home"
-            onClick={() => handleNavClick("#home")}
+            onClick={(event) => handleNavClick(event, "#home")}
             className="flex cursor-pointer items-center gap-2 whitespace-nowrap text-base font-semibold tracking-tight"
             style={{ color: "#0f172a" }}
           >
@@ -230,7 +247,7 @@ export default function Navbar() {
             <a
               key={link.path}
               href={link.path}
-              onClick={() => handleNavClick(link.path)}
+              onClick={(event) => handleNavClick(event, link.path)}
               className="rounded-xl px-4 py-3 transition-colors"
               style={{
                 color:
@@ -247,7 +264,7 @@ export default function Navbar() {
 
           <a
             href="#about"
-            onClick={() => handleNavClick("#about")}
+            onClick={(event) => handleNavClick(event, "#about")}
             className="mt-4 rounded-xl px-4 py-3 text-center text-sm"
             style={{
               background:
