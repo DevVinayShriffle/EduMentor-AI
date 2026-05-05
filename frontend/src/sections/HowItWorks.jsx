@@ -40,7 +40,7 @@ export default function HowItWorks() {
     >
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent" />
 
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl">
         <div className="grid gap-6 xl:grid-cols-2">
           <div className="mx-auto flex h-full w-full max-w-2xl xl:mx-0">
             <div className="flex h-full w-full flex-col rounded-[32px] border border-white/60 bg-white/45 p-6 shadow-[0_24px_80px_rgba(37,99,235,0.08)] backdrop-blur md:p-8">

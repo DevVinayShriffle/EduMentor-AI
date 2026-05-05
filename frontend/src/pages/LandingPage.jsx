@@ -2,10 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../sections/Navbar";
 import Hero from "../sections/Hero";
+import About from "../sections/About";
 import WhyChooseUs from "../sections/WhyChooseUs";
 import Courses from "../sections/Courses";
 import HowItWorks from "../sections/HowItWorks";
 import MobileApp from "../sections/MobileApp";
+import Contact from "../sections/Contact";
 import Footer from "../sections/Footer";
 import Header from "../sections/Header";
 import AuthDrawer from "../components/AuthDrawer";
@@ -58,10 +60,12 @@ export default function LandingPage() {
           window.location.hash = "#courses";
         }}
       />
+      <About />
       <WhyChooseUs />
       <Courses />
       <HowItWorks />
       <MobileApp />
+      <Contact />
       <Footer />
       <AuthDrawer
         isOpen={isAuthOpen}

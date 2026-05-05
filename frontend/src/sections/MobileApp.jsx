@@ -1,51 +1,59 @@
-import mobileAppImage from "../assets/images/mobile-app.jpg";
+import mobileAppImage from "../assets/images/edumentor-logo-no-bg.png";
 
 export default function MobileApp() {
   return (
     <section
       id="app"
-      className="bg-[linear-gradient(180deg,_#f3f6ff_0%,_#eef2ff_100%)] py-20 scroll-mt-24"
+      className="relative overflow-hidden bg-gradient-to-br from-[#302b63] via-[#24243e] to-[#0f0c29] px-4 py-12 text-white sm:px-6 md:py-14 lg:py-16"
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="relative overflow-hidden rounded-[36px] bg-[radial-gradient(circle_at_top_left,_rgba(96,165,250,0.18),_transparent_28%),linear-gradient(135deg,_#0f172a_0%,_#1e1b4b_45%,_#3b0764_100%)] px-6 py-10 text-white shadow-[0_30px_90px_rgba(15,23,42,0.24)] sm:px-8 md:px-10 lg:px-12 lg:py-12">
-          <div className="absolute inset-y-0 right-0 hidden w-1/3 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.10),_transparent_62%)] lg:block" />
+      {/* Soft center glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08),transparent_58%)]" />
 
-          <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
-            <div className="relative z-10 max-w-2xl">
-              <div className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-blue-100 backdrop-blur">
-                Mobile Learning
-              </div>
+      {/* Decorative background lights */}
+      <div className="absolute -bottom-24 left-0 h-56 w-56 rounded-full bg-gradient-to-r from-purple-500/30 to-pink-500/30 blur-3xl sm:h-72 sm:w-72" />
+      <div className="absolute -top-24 right-0 h-56 w-56 rounded-full bg-gradient-to-r from-blue-500/30 to-purple-500/30 blur-3xl sm:h-72 sm:w-72" />
 
-              <h2 className="mt-6 text-4xl font-bold leading-tight tracking-tight md:text-5xl">
-                EduMentor AI
-                <span className="bg-gradient-to-r from-sky-300 via-blue-300 to-fuchsia-300 bg-clip-text text-transparent">
-                  {" "}on the go
-                </span>
-              </h2>
+      <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center justify-between gap-8 md:flex-row md:gap-12">
+        {/* Left Content */}
+        <div className="flex-1 text-center md:text-left">
+          <div className="mb-4 inline-flex items-center rounded-full border border-white/15 bg-white/10 px-4 py-1 text-[10px] font-semibold uppercase tracking-[0.26em] text-blue-100 backdrop-blur">
+            Mobile Learning
+          </div>
 
-              <p className="mt-5 max-w-xl text-base leading-8 text-slate-200 md:text-lg">
-                Access structured courses, join live classes, revisit recorded lectures, solve doubts with AI, and keep your progress moving from anywhere.
-              </p>
+          <h2 className="text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
+            EduMentor AI
+            <span className="bg-gradient-to-r from-blue-300 via-pink-300 to-purple-400 bg-clip-text text-transparent">
+              {" "}on the go
+            </span>
+          </h2>
 
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <button className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-blue-500 via-indigo-500 to-fuchsia-500 px-6 py-4 text-base font-semibold text-white shadow-[0_18px_40px_rgba(79,70,229,0.35)] transition hover:scale-[1.01]">
-                  Get it on Play Store
-                </button>
-                <button className="inline-flex items-center justify-center rounded-2xl border border-white/12 bg-white/10 px-6 py-4 text-base font-semibold text-white backdrop-blur transition hover:bg-white/14">
-                  Download on App Store
-                </button>
-              </div>
-            </div>
+          <p className="mx-auto mt-4 max-w-lg text-sm leading-7 text-gray-300 sm:text-base md:mx-0">
+            Access courses, study materials, recorded lectures, and progress tracking anytime from your mobile.
+          </p>
 
-            <div className="relative z-10 mx-auto w-full max-w-md">
-              <div className="absolute -inset-4 rounded-[40px] bg-gradient-to-br from-white/12 via-blue-300/10 to-fuchsia-400/10 blur-2xl" />
-              <div className="relative overflow-hidden rounded-[32px] border border-white/15 bg-white p-4 shadow-[0_30px_70px_rgba(15,23,42,0.35)]">
-                <img
-                  src={mobileAppImage}
-                  alt="EduMentor AI mobile app"
-                  className="h-full w-full rounded-[24px] object-cover"
-                />
-              </div>
+          {/* Download Buttons */}
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center md:justify-start">
+            <button className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-purple-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-purple-500/20 transition-all duration-300 hover:scale-105 hover:shadow-purple-500/30">
+              Get it on Play Store
+            </button>
+
+            <button className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-gray-700 to-gray-900 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-pink-500/10 transition-all duration-300 hover:scale-105 hover:shadow-pink-500/25">
+              Download on App Store
+            </button>
+          </div>
+        </div>
+
+        {/* Right Image */}
+        <div className="flex flex-1 justify-center md:justify-end">
+          <div className="relative w-52 transition-transform duration-500 hover:scale-105 sm:w-64 md:w-72 lg:w-80">
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-400/30 via-purple-500/30 to-pink-400/30 blur-3xl" />
+
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/95 p-3 shadow-2xl">
+              <img
+                src={mobileAppImage}
+                alt="EduMentor AI mobile app"
+                className="h-full w-full rounded-2xl object-cover"
+              />
             </div>
           </div>
         </div>

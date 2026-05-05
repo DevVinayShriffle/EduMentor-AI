@@ -1,15 +1,33 @@
-const quickLinks = ["Home", "How It Works", "Why Choose Us", "Courses", "Contact"];
-const supportLinks = ["Help Center", "FAQs", "Privacy Policy", "Terms of Service", "Contact Us"];
+import logoImage from "../assets/images/edumentor-logo-white-bg.png";
+
+const quickLinks = [
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Contact", href: "#contact" },
+  { label: "How It Works", href: "#how" },
+  { label: "Why Choose Us", href: "#why" },
+  { label: "Courses", href: "#courses" }
+];
+const supportLinks = [
+  { label: "Help Center", href: "#contact" },
+  { label: "FAQs", href: "#contact" },
+  { label: "Privacy Policy", href: "#contact" },
+  { label: "Terms of Service", href: "#contact" },
+  { label: "Contact Us", href: "#contact" }
+];
 
 export default function Footer() {
   return (
     <footer className="bg-black text-white">
-      <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-1">
         <div className="grid gap-12 md:grid-cols-2 xl:grid-cols-4">
           <div className="max-w-sm">
-            <h2 className="text-4xl font-bold tracking-tight text-white">
-              EduMentor<span className="text-blue-500">AI</span>
-            </h2>
+            <div className="flex items-center gap-3">
+              <img src={logoImage} alt="EduMentor AI logo" className="h-12 w-auto rounded-sm" />
+              <h2 className="text-3xl font-bold tracking-tight text-white">
+                EduMentor<span className="text-blue-500">AI</span>
+              </h2>
+            </div>
             <p className="mt-6 text-lg leading-8 text-slate-400">
               Empowering students with structured learning, live classes, AI doubt solving, and progress tracking in one modern platform.
             </p>
@@ -22,11 +40,11 @@ export default function Footer() {
             <div className="space-y-4 text-lg text-slate-400">
               {quickLinks.map((link) => (
                 <a
-                  key={link}
-                  href="#"
+                  key={link.label}
+                  href={link.href}
                   className="block transition-colors duration-200 hover:text-white"
                 >
-                  {link}
+                  {link.label}
                 </a>
               ))}
             </div>
@@ -39,11 +57,11 @@ export default function Footer() {
             <div className="space-y-4 text-lg text-slate-400">
               {supportLinks.map((link) => (
                 <a
-                  key={link}
-                  href="#"
+                  key={link.label}
+                  href={link.href}
                   className="block transition-colors duration-200 hover:text-white"
                 >
-                  {link}
+                  {link.label}
                 </a>
               ))}
             </div>
