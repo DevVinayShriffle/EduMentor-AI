@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
-export default function Navbar() {
+export default function Navbar({
+  isAuthenticated,
+  onLoginClick,
+  onDashboardClick,
+  onLogoutClick,
+}) {
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState("/");
+  const [active, setActive] = useState("#home");
 
   const links = [
     { name: "Home", path: "/" },
@@ -11,26 +16,33 @@ export default function Navbar() {
     { name: "Contact", path: "/contact" },
   ];
 
+  const handleNavClick = (path) => {
+    setActive(path);
+    setOpen(false);
+  };
+
   return (
     <header
       className="w-full sticky top-0 z-50 border-b backdrop-blur-md"
       style={{
-  background: "rgba(11, 11, 13, 0.18)",
-  borderColor: "rgba(15, 23, 42, 0.10)",
-  backdropFilter: "blur(12px)",
-  WebkitBackdropFilter: "blur(12px)",
-  boxShadow: "0 6px 24px rgba(15, 23, 42, 0.08)",
-}}
+        background: "rgba(11, 11, 13, 0.18)",
+        borderColor: "rgba(15, 23, 42, 0.10)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+        boxShadow: "0 6px 24px rgba(15, 23, 42, 0.08)",
+      }}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 py-2">
 
         {/* Logo */}
-        <h1
+        <a
+          href="#home"
+          onClick={() => handleNavClick("#home")}
           className="text-lg sm:text-xl font-semibold tracking-tight cursor-pointer"
           style={{ color: "var(--text-primary)" }}
         >
           EduMentor<span style={{ color: "var(--accent-primary)" }}>AI</span>
-        </h1>
+        </a>
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center gap-6 text-sm">
@@ -38,7 +50,7 @@ export default function Navbar() {
             <a
               key={link.path}
               href={link.path}
-              onClick={() => setActive(link.path)}
+              onClick={() => handleNavClick(link.path)}
               className="relative pb-1 transition-colors"
               style={{
                 color:
@@ -64,18 +76,46 @@ export default function Navbar() {
 
         {/* Right */}
         <div className="flex items-center gap-2 sm:gap-3">
-
-          {/* Login */}
-          <button
-            className="hidden md:block text-xs sm:text-sm px-3 py-1.5 rounded-md transition-all hover:scale-[1.03]"
-            style={{
-              background:
-                "linear-gradient(90deg, #3b82f6, #6366f1)",
-              color: "#fff",
-            }}
-          >
-            Login
-          </button>
+          {isAuthenticated ? (
+            <>
+              <button
+                type="button"
+                onClick={onDashboardClick}
+                className="hidden md:block text-xs sm:text-sm px-3 py-1.5 rounded-md transition-all hover:scale-[1.03]"
+                style={{
+                  border: "1px solid rgba(255,255,255,0.16)",
+                  color: "#fff",
+                  background: "rgba(255,255,255,0.08)",
+                }}
+              >
+                Dashboard
+              </button>
+              <button
+                type="button"
+                onClick={onLogoutClick}
+                className="hidden md:block text-xs sm:text-sm px-3 py-1.5 rounded-md transition-all hover:scale-[1.03]"
+                style={{
+                  background: "linear-gradient(90deg, #3b82f6, #6366f1)",
+                  color: "#fff",
+                }}
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <button
+              type="button"
+              onClick={onLoginClick}
+              className="hidden md:block text-xs sm:text-sm px-3 py-1.5 rounded-md transition-all hover:scale-[1.03]"
+              style={{
+                background:
+                  "linear-gradient(90deg, #3b82f6, #6366f1)",
+                color: "#fff",
+              }}
+            >
+              Login
+            </button>
+          )}
 
           {/* Hamburger */}
           <button
@@ -105,7 +145,9 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-0 right-0 h-full w-64 z-50 md:hidden transform transition-transform duration-300`}
+        className={`fixed top-0 right-0 h-full w-64 z-50 transform transition-transform duration-300 md:hidden ${
+          open ? "translate-x-0" : "translate-x-full"
+        }`}
         style={{
           background: "rgba(255,255,255,0.95)",
           borderLeft: "1px solid var(--border-soft)",
@@ -118,8 +160,7 @@ export default function Navbar() {
               key={link.path}
               href={link.path}
               onClick={() => {
-                setActive(link.path);
-                setOpen(false);
+                handleNavClick(link.path);
               }}
               style={{
                 color:
@@ -133,17 +174,56 @@ export default function Navbar() {
             </a>
           ))}
 
-          {/* Login in mobile */}
-          <button
-            className="mt-4 text-sm px-3 py-2 rounded-md"
-            style={{
-              background:
-                "linear-gradient(90deg, #3b82f6, #6366f1)",
-              color: "white",
-            }}
-          >
-            Login
-          </button>
+          {isAuthenticated ? (
+            <>
+              <button
+                type="button"
+                onClick={() => {
+                  setOpen(false);
+                  onDashboardClick();
+                }}
+                className="mt-4 text-sm px-3 py-2 rounded-md"
+                style={{
+                  background: "rgba(255,255,255,0.08)",
+                  color: "white",
+                  border: "1px solid rgba(255,255,255,0.16)",
+                }}
+              >
+                Dashboard
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setOpen(false);
+                  onLogoutClick();
+                }}
+                className="text-sm px-3 py-2 rounded-md"
+                style={{
+                  background:
+                    "linear-gradient(90deg, #3b82f6, #6366f1)",
+                  color: "white",
+                }}
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <button
+              type="button"
+              onClick={() => {
+                setOpen(false);
+                onLoginClick();
+              }}
+              className="mt-4 text-sm px-3 py-2 rounded-md"
+              style={{
+                background:
+                  "linear-gradient(90deg, #3b82f6, #6366f1)",
+                color: "white",
+              }}
+            >
+              Login
+            </button>
+          )}
         </div>
       </div>
     </header>

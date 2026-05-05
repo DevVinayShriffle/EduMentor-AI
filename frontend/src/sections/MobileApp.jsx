@@ -4,7 +4,7 @@ export default function MobileApp() {
   return (
     <section
       id="app"
-      className="bg-[linear-gradient(180deg,_#f3f6ff_0%,_#eef2ff_100%)] py-20"
+      className="bg-[linear-gradient(180deg,_#f3f6ff_0%,_#eef2ff_100%)] py-20 scroll-mt-24"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="relative overflow-hidden rounded-[36px] bg-[radial-gradient(circle_at_top_left,_rgba(96,165,250,0.18),_transparent_28%),linear-gradient(135deg,_#0f172a_0%,_#1e1b4b_45%,_#3b0764_100%)] px-6 py-10 text-white shadow-[0_30px_90px_rgba(15,23,42,0.24)] sm:px-8 md:px-10 lg:px-12 lg:py-12">
@@ -26,15 +26,6 @@ export default function MobileApp() {
               <p className="mt-5 max-w-xl text-base leading-8 text-slate-200 md:text-lg">
                 Access structured courses, join live classes, revisit recorded lectures, solve doubts with AI, and keep your progress moving from anywhere.
               </p>
-
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                <div className="rounded-2xl border border-white/10 bg-white/8 px-4 py-4 text-sm text-slate-100 backdrop-blur">
-                  Live classes, revision shorts, and study materials in one mobile experience.
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-white/8 px-4 py-4 text-sm text-slate-100 backdrop-blur">
-                  AI doubt solving and performance insights that travel with the student.
-                </div>
-              </div>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <button className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-blue-500 via-indigo-500 to-fuchsia-500 px-6 py-4 text-base font-semibold text-white shadow-[0_18px_40px_rgba(79,70,229,0.35)] transition hover:scale-[1.01]">

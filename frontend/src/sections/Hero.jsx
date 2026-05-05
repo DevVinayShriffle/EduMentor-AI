@@ -1,7 +1,8 @@
-export default function Hero() {
+export default function Hero({ onGetStarted, onExploreCourses }) {
   return (
     <section
-      className="relative pt-24 md:pt-32 pb-20 px-4 text-center overflow-hidden"
+      id="home"
+      className="relative overflow-hidden px-4 pb-20 pt-32 text-center md:pt-40 scroll-mt-24"
       style={{
         background: "linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)",
       }}
@@ -48,6 +49,8 @@ export default function Hero() {
 
           {/* Primary button */}
           <button
+            type="button"
+            onClick={onGetStarted}
             className="px-6 py-2.5 rounded-md text-sm font-medium transition-all hover:scale-[1.03]"
             style={{
               background:
@@ -60,6 +63,8 @@ export default function Hero() {
 
           {/* Secondary button */}
           <button
+            type="button"
+            onClick={onExploreCourses}
             className="px-6 py-2.5 rounded-md text-sm font-medium transition-all hover:bg-slate-100"
             style={{
               border: "1px solid var(--border-soft)",

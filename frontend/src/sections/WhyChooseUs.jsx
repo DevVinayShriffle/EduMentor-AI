@@ -18,7 +18,7 @@ const features = [
 
 export default function WhyChooseUs() {
   return (
-    <section id="why" className="py-16 px-4 max-w-6xl mx-auto text-center">
+    <section id="why" className="scroll-mt-24 py-16 px-4 max-w-6xl mx-auto text-center">
 
       {/* Heading */}
       <h2
