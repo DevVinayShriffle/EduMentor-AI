@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import logoImage from "../assets/images/edumentor-logo-no-bg.png";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -110,9 +111,10 @@ export default function Navbar() {
           <a
             href="#home"
             onClick={() => handleNavClick("#home")}
-            className="cursor-pointer whitespace-nowrap text-lg font-semibold tracking-tight sm:text-xl"
+            className="flex cursor-pointer items-center gap-2 whitespace-nowrap text-lg font-semibold tracking-tight sm:text-xl"
             style={{ color: "#0f172a" }}
           >
+            <img src={logoImage} alt="EduMentor AI logo" className="h-9 w-auto" />
             EduMentor<span style={{ color: "var(--accent-primary)" }}>AI</span>
           </a>
 
@@ -205,9 +207,10 @@ export default function Navbar() {
           <a
             href="#home"
             onClick={() => handleNavClick("#home")}
-            className="cursor-pointer whitespace-nowrap text-base font-semibold tracking-tight"
+            className="flex cursor-pointer items-center gap-2 whitespace-nowrap text-base font-semibold tracking-tight"
             style={{ color: "#0f172a" }}
           >
+            <img src={logoImage} alt="EduMentor AI logo" className="h-8 w-auto" />
             EduMentor<span style={{ color: "var(--accent-primary)" }}>AI</span>
           </a>
 
