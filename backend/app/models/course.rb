@@ -8,4 +8,7 @@ class Course < ApplicationRecord
   validates :duration_type, presence: true
   validates :status, presence: true
   validates :description, presence: true
+
+  has_many :enrollments
+  has_many :students, through: :enrollments, source: :user
 end

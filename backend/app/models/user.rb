@@ -12,4 +12,9 @@ class User < ApplicationRecord
          jwt_revocation_strategy: self
 
   has_many :courses, foreign_key: :user_id
+
+  has_many :enrollments
+  has_many :enrolled_courses, -> { where(enrollments: { status: :active }) },
+           through: :enrollments,
+           source: :course
 end
