@@ -72,7 +72,7 @@ export default function AuthDrawer({ isOpen, mode, onClose, onModeChange, onSucc
 
   return (
     <div
-      className={`fixed inset-0 z-[80] transition-all duration-300 ${
+      className={`fixed inset-0 z-[140] transition-all duration-300 ${
         isOpen ? "pointer-events-auto" : "pointer-events-none"
       }`}
       aria-hidden={!isOpen}
