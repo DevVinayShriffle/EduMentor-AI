@@ -24,12 +24,6 @@ export default function Contact() {
                 <p className="text-xs font-semibold uppercase tracking-[0.24em] text-blue-700">Email</p>
                 <p className="mt-3 text-base font-semibold text-slate-950">hello@edumentorai.com</p>
               </div>
-              <div className="rounded-[24px] border border-white/75 bg-white/88 px-5 py-5 shadow-[0_18px_50px_rgba(37,99,235,0.08)] backdrop-blur">
-                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-blue-700">Best For</p>
-                <p className="mt-3 text-sm leading-7 text-slate-600">
-                  Product walkthroughs, academic operations setup, teacher onboarding, and planning for structured online learning.
-                </p>
-              </div>
             </div>
           </div>
 
