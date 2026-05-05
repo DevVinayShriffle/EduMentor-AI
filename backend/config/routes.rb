@@ -8,6 +8,14 @@ Rails.application.routes.draw do
       delete "/logout", to: "sessions#destroy"
 
       resources :courses
+
+      resources :enrollments, only: [:create, :index] do
+        member do
+          patch :cancel
+        end
+      end
+
+      get "/my-courses", to: "enrollments#my_courses"
     end
   end
 
