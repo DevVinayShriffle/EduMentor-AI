@@ -26,7 +26,13 @@ export default function DashboardPage() {
       onBackToSite={() => navigate("/")}
       onLogout={handleLogout}
     >
-      <DashboardHome user={user} homeContent={roleConfig.home} />
+      {({ isDarkTheme }) => (
+        <DashboardHome
+          user={user}
+          homeContent={roleConfig.home}
+          isDarkTheme={isDarkTheme}
+        />
+      )}
     </DashboardShell>
   );
 }
