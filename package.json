@@ -2,9 +2,14 @@
   "name": "edumentor-ai",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\" \"npm run dev:redis\" \"npm run dev:sidekiq\"",
+
     "dev:frontend": "cd frontend && npm run dev",
-    "dev:backend": "cd backend && rails server"
+    "dev:backend": "cd backend && rails server",
+
+    "dev:redis": "redis-server",
+
+    "dev:sidekiq": "cd backend && bundle exec sidekiq"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
