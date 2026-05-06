@@ -1,20 +1,42 @@
+import { useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import LandingPage from "./pages/LandingPage";
-import DashboardPage from "./pages/DashboardPage";
+import DashboardPage from "./Dashboard/Pages/DashboardPage";
 
 export default function App() {
+  const [isDarkTheme, setIsDarkTheme] = useState(() => {
+    if (typeof window === "undefined") return false;
+
+    return window.localStorage.getItem("app-theme") === "dark";
+  });
+
+  useEffect(() => {
+    window.localStorage.setItem("app-theme", isDarkTheme ? "dark" : "light");
+  }, [isDarkTheme]);
+
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route
+            path="/"
+            element={(
+              <LandingPage
+                isDarkTheme={isDarkTheme}
+                onThemeToggle={() => setIsDarkTheme((current) => !current)}
+              />
+            )}
+          />
           <Route
             path="/dashboard"
             element={(
               <ProtectedRoute>
-                <DashboardPage />
+                <DashboardPage
+                  isDarkTheme={isDarkTheme}
+                  onThemeToggle={() => setIsDarkTheme((current) => !current)}
+                />
               </ProtectedRoute>
             )}
           />
