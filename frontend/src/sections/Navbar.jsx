@@ -112,9 +112,8 @@ export default function Navbar({
   return (
     <>
       <header
-        className={`fixed left-0 z-[100] w-full border-b backdrop-blur-md transition-[top,box-shadow,background-color] duration-300 ${
-          isPinned ? "top-0" : "top-[29px]"
-        }`}
+        className={`fixed left-0 z-[100] w-full border-b backdrop-blur-md transition-[top,box-shadow,background-color] duration-300 ${isPinned ? "top-0" : "top-[29px]"
+          }`}
         style={{
           background: isPinned
             ? "rgba(255, 255, 255, 0.82)"
@@ -168,48 +167,23 @@ export default function Navbar({
             ))}
           </nav>
 
-        {/* Right */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          {isAuthenticated ? (
-            <>
-              <button
-                type="button"
-                onClick={onDashboardClick}
-                className="hidden md:block text-xs sm:text-sm px-3 py-1.5 rounded-md transition-all hover:scale-[1.03]"
-                style={{
-                  border: "1px solid rgba(255,255,255,0.16)",
-                  color: "#fff",
-                  background: "rgba(255,255,255,0.08)",
-                }}
-              >
-                Dashboard
+          {/* Right */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {isAuthenticated ? (
+              <>
+                <button type="button" onClick={onDashboardClick} className="hidden md:block text-xs sm:text-sm px-3 py-1.5 rounded-md transition-all hover:scale-[1.03]" style={{color: "#fff", background: "linear-gradient(135deg, #2563eb, #4f46e5, #7c3aed)", boxShadow: "0 10px 24px rgba(79, 70, 229, 0.28)"}}>
+                  Dashboard
+                </button>
+
+                <button type="button" onClick={onLogoutClick} className="hidden md:block text-xs sm:text-sm px-3 py-1.5 rounded-md transition-all hover:scale-[1.03]" style={{color: "#fff", background: "linear-gradient(135deg, #ef4444, #e11d48)", boxShadow: "0 10px 24px rgba(225, 29, 72, 0.26)"}}>
+                  Logout
+                </button>
+              </>
+            ) : (
+              <button type="button" onClick={onLoginClick} className="hidden md:block text-xs sm:text-sm px-3 py-1.5 rounded-md transition-all hover:scale-[1.03]" style={{background: "linear-gradient(90deg, #3b82f6, #6366f1)", color: "#fff"}}>
+                Login
               </button>
-              <button
-                type="button"
-                onClick={onLogoutClick}
-                className="hidden md:block text-xs sm:text-sm px-3 py-1.5 rounded-md transition-all hover:scale-[1.03]"
-                style={{
-                  background: "linear-gradient(90deg, #3b82f6, #6366f1)",
-                  color: "#fff",
-                }}
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <button
-              type="button"
-              onClick={onLoginClick}
-              className="hidden md:block text-xs sm:text-sm px-3 py-1.5 rounded-md transition-all hover:scale-[1.03]"
-              style={{
-                background:
-                  "linear-gradient(90deg, #3b82f6, #6366f1)",
-                color: "#fff",
-              }}
-            >
-              Login
-            </button>
-          )}
+            )}
 
             <button
               type="button"
@@ -230,11 +204,10 @@ export default function Navbar({
       </header>
 
       <div
-        className={`fixed left-0 top-0 z-[105] h-dvh w-[min(22rem,78vw)] md:hidden transition-all duration-300 ${
-          open
+        className={`fixed left-0 top-0 z-[105] h-dvh w-[min(22rem,78vw)] md:hidden transition-all duration-300 ${open
             ? "visible opacity-100 pointer-events-auto"
             : "invisible opacity-0 pointer-events-none"
-        }`}
+          }`}
         style={{
           background: "rgba(15, 23, 42, 0.28)",
           backdropFilter: "blur(16px)",
@@ -246,9 +219,8 @@ export default function Navbar({
       />
 
       <div
-        className={`fixed right-0 top-0 z-[110] h-dvh w-[min(22rem,78vw)] overflow-y-auto border-l shadow-2xl transition-transform duration-300 md:hidden ${
-          open ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed right-0 top-0 z-[110] h-dvh w-[min(22rem,78vw)] overflow-y-auto border-l shadow-2xl transition-transform duration-300 md:hidden ${open ? "translate-x-0" : "translate-x-full"
+          }`}
         style={{
           background: "rgba(255,255,255,1)",
           borderColor: "var(--border-soft)",
