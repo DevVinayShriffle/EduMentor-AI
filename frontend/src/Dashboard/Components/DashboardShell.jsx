@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import DashboardNavbar from "./DashboardNavbar";
 import DashbaordSidebar from "./DashbaordSidebar";
 
@@ -6,6 +6,8 @@ export default function DashboardShell({
   user,
   roleConfig,
   activeItemId,
+  isDarkTheme,
+  onThemeToggle,
   onItemSelect,
   onBackToSite,
   onLogout,
@@ -13,15 +15,6 @@ export default function DashboardShell({
 }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDesktopSidebarCollapsed, setIsDesktopSidebarCollapsed] = useState(false);
-  const [isDarkTheme, setIsDarkTheme] = useState(() => {
-    if (typeof window === "undefined") return false;
-
-    return window.localStorage.getItem("dashboard-theme") === "dark";
-  });
-
-  useEffect(() => {
-    window.localStorage.setItem("dashboard-theme", isDarkTheme ? "dark" : "light");
-  }, [isDarkTheme]);
 
   const activeLabel = useMemo(() => {
     for (const section of roleConfig.navigation) {
@@ -56,6 +49,7 @@ export default function DashboardShell({
         activeItemId={activeItemId}
         isDesktopCollapsed={isDesktopSidebarCollapsed}
         isDarkTheme={isDarkTheme}
+        onBackToSite={onBackToSite}
         onItemSelect={handleItemSelect}
         onDesktopExpand={() => setIsDesktopSidebarCollapsed(false)}
         onDesktopCollapse={() => setIsDesktopSidebarCollapsed(true)}
@@ -67,7 +61,7 @@ export default function DashboardShell({
           user={user}
           roleLabel={roleConfig.label}
           isDarkTheme={isDarkTheme}
-          onThemeToggle={() => setIsDarkTheme((current) => !current)}
+          onThemeToggle={onThemeToggle}
           onMenuToggle={() => setIsSidebarOpen(true)}
           onBackToSite={onBackToSite}
           onLogout={onLogout}

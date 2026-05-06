@@ -13,7 +13,7 @@ import Header from "../sections/Header";
 import AuthDrawer from "../components/AuthDrawer";
 import { useAuth } from "../context/AuthContext";
 
-export default function LandingPage() {
+export default function LandingPage({ isDarkTheme, onThemeToggle }) {
   const navigate = useNavigate();
   const { isAuthenticated, logout } = useAuth();
   const [isAuthOpen, setIsAuthOpen] = useState(false);
@@ -38,10 +38,12 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="bg-white text-gray-900">
-      <Header />
+    <div className={isDarkTheme ? "landing-theme-dark bg-slate-950 text-slate-100" : "bg-white text-gray-900"}>
+      <Header isDarkTheme={isDarkTheme} />
       <Navbar
         isAuthenticated={isAuthenticated}
+        isDarkTheme={isDarkTheme}
+        onThemeToggle={onThemeToggle}
         onLoginClick={() => openAuth("login")}
         onSignupClick={() => openAuth("signup")}
         onDashboardClick={() => navigate("/dashboard")}

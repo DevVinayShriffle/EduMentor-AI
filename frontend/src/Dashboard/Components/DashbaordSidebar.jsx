@@ -48,6 +48,7 @@ export default function DashbaordSidebar({
   activeItemId,
   isDesktopCollapsed,
   isDarkTheme,
+  onBackToSite,
   onItemSelect,
   onDesktopExpand,
   onDesktopCollapse,
@@ -87,6 +88,11 @@ export default function DashbaordSidebar({
     );
   };
 
+  const handleBrandClick = () => {
+    onClose?.();
+    onBackToSite?.();
+  };
+
   return (
     <>
       <div
@@ -102,7 +108,7 @@ export default function DashbaordSidebar({
         className={`fixed left-0 top-0 z-50 flex h-dvh w-[18.5rem] flex-col border-r text-slate-900 transition-[width,transform,background-color,border-color] duration-300 lg:translate-x-0 ${isOpen ? "translate-x-0" : "-translate-x-full"
           } ${isDesktopCollapsed ? "lg:w-[5.5rem]" : "lg:w-[18.5rem]"} ${isDarkTheme
             ? "border-white/10 bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.28),_transparent_30%),radial-gradient(circle_at_top_right,_rgba(236,72,153,0.18),_transparent_24%),linear-gradient(180deg,_rgba(7,10,24,0.98)_0%,_rgba(12,18,35,0.98)_48%,_rgba(17,24,39,0.98)_100%)] text-slate-100 shadow-[0_24px_80px_rgba(2,6,23,0.45)]"
-            : "border-slate-200/80 bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.16),_transparent_28%),linear-gradient(180deg,_rgba(248,250,252,0.98)_0%,_rgba(238,242,255,0.98)_100%)] text-slate-900 shadow-[0_24px_80px_rgba(15,23,42,0.12)]"
+            : "border-slate-200/80 bg-[radial-gradient(circle_at_top_left,rgba(99,102,241,0.16),transparent_28%),linear-gradient(180deg,rgba(248,250,252,0.98)_0%,rgba(238,242,255,0.98)_100%)] text-slate-900 shadow-[0_24px_80px_rgba(15,23,42,0.12)]"
           }`}
       >
         <div className={`px-5 py-5 ${isDesktopCollapsed ? "lg:px-4" : ""}`}>
@@ -110,34 +116,47 @@ export default function DashbaordSidebar({
             className={`flex items-center gap-3 ${isDesktopCollapsed ? "lg:justify-center" : ""
               }`}
           >
-            <div
-              className={`flex h-14 w-14 items-center justify-center rounded-full ${isDarkTheme
-                  ? "bg-white shadow-[0_0_22px_rgba(255,255,255,0.75),0_0_50px_rgba(129,140,248,0.55),0_14px_38px_rgba(15,23,42,0.45)]"
-                  : ""
-                }`}
+            <button
+              type="button"
+              onClick={handleBrandClick}
+              className={`flex min-w-0 items-center gap-3 rounded-2xl text-left transition hover:opacity-90 ${
+                isDesktopCollapsed ? "lg:justify-center" : "flex-1"
+              }`}
+              aria-label="Go to landing page"
+              title="Back to landing page"
             >
-              <img
-                src={logoImage}
-                alt="EduMentor AI logo"
-                className="h-10 w-auto"
-              />
-            </div>
-
-            <div className={`min-w-0 flex-1 ${isDesktopCollapsed ? "lg:hidden" : ""}`}>
-              <p
-                className={`text-lg font-semibold tracking-tight ${isDarkTheme ? "text-slate-50" : "text-slate-950"
-                  }`}
+              <div
+                className={`flex h-14 w-14 items-center justify-center rounded-full ${
+                  isDarkTheme
+                    ? "bg-white shadow-[0_0_22px_rgba(255,255,255,0.75),0_0_50px_rgba(129,140,248,0.55),0_14px_38px_rgba(15,23,42,0.45)]"
+                    : ""
+                }`}
               >
-                EduMentor AI
-              </p>
+                <img
+                  src={logoImage}
+                  alt="EduMentor AI logo"
+                  className="h-10 w-auto"
+                />
+              </div>
 
-              <p
-                className={`text-xs font-semibold uppercase tracking-[0.24em] ${isDarkTheme ? "text-fuchsia-300" : "text-indigo-600"
+              <div className={`min-w-0 flex-1 ${isDesktopCollapsed ? "lg:hidden" : ""}`}>
+                <p
+                  className={`text-lg font-semibold tracking-tight ${
+                    isDarkTheme ? "text-slate-50" : "text-slate-950"
                   }`}
-              >
-                {roleLabel} Panel
-              </p>
-            </div>
+                >
+                  EduMentor AI
+                </p>
+
+                <p
+                  className={`text-xs font-semibold uppercase tracking-[0.24em] ${
+                    isDarkTheme ? "text-fuchsia-300" : "text-indigo-600"
+                  }`}
+                >
+                  {roleLabel} Panel
+                </p>
+              </div>
+            </button>
 
             {!isDesktopCollapsed ? (
               <button

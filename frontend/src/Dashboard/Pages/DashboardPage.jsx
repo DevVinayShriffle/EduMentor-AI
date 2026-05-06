@@ -5,7 +5,7 @@ import DashboardShell from "../Components/DashboardShell";
 import DashboardHome from "./DashboardHome";
 import { getRoleConfig } from "../configs/roleConfigs";
 
-export default function DashboardPage() {
+export default function DashboardPage({ isDarkTheme, onThemeToggle }) {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
   const roleConfig = getRoleConfig(user?.role);
@@ -22,6 +22,8 @@ export default function DashboardPage() {
       user={user}
       roleConfig={roleConfig}
       activeItemId={activeItemId}
+      isDarkTheme={isDarkTheme}
+      onThemeToggle={onThemeToggle}
       onItemSelect={setActiveItemId}
       onBackToSite={() => navigate("/")}
       onLogout={handleLogout}
