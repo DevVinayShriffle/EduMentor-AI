@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  file_url: MyString
+  public_id: MyString
+  resource_type: MyString
+  user: one
+  course: one
+
+two:
+  file_url: MyString
+  public_id: MyString
+  resource_type: MyString
+  user: two
+  course: two

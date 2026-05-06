@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_05_074826) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_06_112749) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -35,6 +35,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_05_074826) do
     t.index ["user_id"], name: "index_enrollments_on_user_id"
   end
 
+  create_table "media_files", force: :cascade do |t|
+    t.bigint "course_id", null: false
+    t.datetime "created_at", null: false
+    t.string "file_url"
+    t.string "public_id"
+    t.string "resource_type"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["course_id"], name: "index_media_files_on_course_id"
+    t.index ["user_id"], name: "index_media_files_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email", default: "", null: false
@@ -55,4 +67,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_05_074826) do
   add_foreign_key "courses", "users"
   add_foreign_key "enrollments", "courses"
   add_foreign_key "enrollments", "users"
+  add_foreign_key "media_files", "courses"
+  add_foreign_key "media_files", "users"
 end
