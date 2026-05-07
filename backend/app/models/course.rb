@@ -14,6 +14,11 @@ class Course < ApplicationRecord
            source: :user
 
   # =========================
+  # Callbacks
+  # =========================
+  before_destroy :remove_cloudinary_assets
+
+  # =========================
   # Enums
   # =========================
   enum :status, {
@@ -34,4 +39,18 @@ class Course < ApplicationRecord
   validates :description, presence: true
   validates :duration_type, presence: true
   validates :status, presence: true
+  validates :price,
+          numericality: {
+            greater_than_or_equal_to: 0
+          }
+
+  private
+
+  def remove_cloudinary_assets
+    return if banner_public_id.blank?
+
+    CloudinaryService.destroy(
+      public_id: banner_public_id
+    )
+  end
 end

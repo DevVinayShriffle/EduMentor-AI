@@ -58,3 +58,4 @@ gem 'sendgrid-ruby'
 gem 'sidekiq'
 gem 'redis'
 gem "cloudinary"
+gem "jsonapi-serializer"

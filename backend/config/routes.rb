@@ -7,7 +7,12 @@ Rails.application.routes.draw do
       post "/login", to: "sessions#create"
       delete "/logout", to: "sessions#destroy"
 
-      resources :courses
+      resources :courses do
+        member do
+          patch :upload_thumbnail
+          patch :upload_banner
+        end
+      end
 
       resources :enrollments, only: [:create, :index] do
         member do

@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_07_051851) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_07_072706) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "courses", force: :cascade do |t|
+    t.string "banner_public_id"
     t.string "banner_url"
     t.string "class_level"
     t.datetime "created_at", null: false
