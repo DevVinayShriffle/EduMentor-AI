@@ -7,7 +7,20 @@ Rails.application.routes.draw do
       post "/login", to: "sessions#create"
       delete "/logout", to: "sessions#destroy"
 
-      resources :courses
+      resources :courses do
+        resource :syllabus, only: [:show, :create, :update, :destroy]
+        resources :media_files, only: [:index, :create]
+      end
+
+      resources :syllabuses, only: [] do
+        resources :lessons, only: [:index, :create]
+      end
+
+      resources :lessons, only: [:show, :update, :destroy] do
+        resources :media_files, only: [:index, :create]
+      end
+
+      resources :media_files, only: [:show, :update, :destroy]
 
       resources :enrollments, only: [:create, :index] do
         member do

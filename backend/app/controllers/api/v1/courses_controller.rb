@@ -15,14 +15,22 @@ class Api::V1::CoursesController < ApplicationController
       Course.published
     end
     
-    render json: courses
+    render json: {
+      status: "success",
+      message: "Courses fetched successfully",
+      data: courses
+    }, status: :ok
   end
   
   # GET /courses/:id
   def show
     authorize! :read, @course
     
-    render json: @course
+    render json: {
+      status: "success",
+      message: "Course fetched successfully",
+      data: @course
+    }, status: :ok
   end
   
   # POST /courses
@@ -35,9 +43,17 @@ class Api::V1::CoursesController < ApplicationController
     authorize! :create, course
     
     if course.save
-      render json: course, status: :created
+      render json: {
+        status: "success",
+        message: "Course created successfully",
+        data: course
+      }, status: :created
     else
-      render json: { errors: course.errors }, status: :unprocessable_entity
+      render json: {
+        status: "error",
+        message: "Course creation failed",
+        data: course.errors
+      }, status: :unprocessable_entity
     end
   end
   
@@ -46,9 +62,17 @@ class Api::V1::CoursesController < ApplicationController
     authorize! :update, @course
     
     if @course.update(course_params)
-      render json: @course
+      render json: {
+        status: "success",
+        message: "Course updated successfully",
+        data: @course
+      }, status: :ok
     else
-      render json: { errors: @course.errors }, status: :unprocessable_entity
+      render json: {
+        status: "error",
+        message: "Course update failed",
+        data: @course.errors
+      }, status: :unprocessable_entity
     end
   end
   
@@ -57,7 +81,11 @@ class Api::V1::CoursesController < ApplicationController
     authorize! :destroy, @course
     
     @course.destroy
-    head :no_content
+    render json: {
+      status: "success",
+      message: "Course deleted successfully",
+      data: nil
+    }, status: :ok
   end
   
   private

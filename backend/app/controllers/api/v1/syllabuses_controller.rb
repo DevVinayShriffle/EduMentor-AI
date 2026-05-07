@@ -6,7 +6,11 @@ class Api::V1::SyllabusesController < ApplicationController
   def show
     authorize! :read, @course
 
-    render json: @syllabus, include: :lessons
+    render json: {
+      status: "success",
+      message: "Syllabus fetched successfully",
+      data: @syllabus.as_json(include: :lessons)
+    }, status: :ok
   end
 
   # POST /courses/:course_id/syllabus
@@ -16,9 +20,17 @@ class Api::V1::SyllabusesController < ApplicationController
     syllabus = @course.build_syllabus(syllabus_params)
 
     if syllabus.save
-      render json: syllabus, status: :created
+      render json: {
+        status: "success",
+        message: "Syllabus created successfully",
+        data: syllabus
+      }, status: :created
     else
-      render json: { errors: syllabus.errors }, status: :unprocessable_entity
+      render json: {
+        status: "error",
+        message: "Syllabus creation failed",
+        data: syllabus.errors
+      }, status: :unprocessable_entity
     end
   end
 
@@ -27,9 +39,17 @@ class Api::V1::SyllabusesController < ApplicationController
     authorize! :update, @course
 
     if @syllabus.update(syllabus_params)
-      render json: @syllabus
+      render json: {
+        status: "success",
+        message: "Syllabus updated successfully",
+        data: @syllabus
+      }, status: :ok
     else
-      render json: { errors: @syllabus.errors }, status: :unprocessable_entity
+      render json: {
+        status: "error",
+        message: "Syllabus update failed",
+        data: @syllabus.errors
+      }, status: :unprocessable_entity
     end
   end
 
@@ -38,7 +58,11 @@ class Api::V1::SyllabusesController < ApplicationController
     authorize! :destroy, @course
 
     @syllabus.destroy
-    head :no_content
+    render json: {
+      status: "success",
+      message: "Syllabus deleted successfully",
+      data: nil
+    }, status: :ok
   end
 
   private
@@ -52,7 +76,11 @@ class Api::V1::SyllabusesController < ApplicationController
 
     return if @syllabus.present?
 
-    render json: { message: "Syllabus not found" }, status: :not_found
+    render json: {
+      status: "error",
+      message: "Syllabus not found",
+      data: nil
+    }, status: :not_found
   end
 
   def syllabus_params

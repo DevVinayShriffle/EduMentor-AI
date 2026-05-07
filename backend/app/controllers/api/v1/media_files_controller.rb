@@ -7,14 +7,22 @@ class Api::V1::MediaFilesController < ApplicationController
     authorize! :read, parent_course_for(@mediable)
 
     media_files = @mediable.media_files.order(:position)
-    render json: media_files
+    render json: {
+      status: "success",
+      message: "Media files fetched successfully",
+      data: media_files
+    }, status: :ok
   end
 
   # GET /media_files/:id
   def show
     authorize! :read, parent_course_for(@media_file.mediable)
 
-    render json: @media_file
+    render json: {
+      status: "success",
+      message: "Media file fetched successfully",
+      data: @media_file
+    }, status: :ok
   end
 
   # POST /lessons/:lesson_id/media_files
@@ -25,9 +33,17 @@ class Api::V1::MediaFilesController < ApplicationController
     media_file.user = current_user
 
     if media_file.save
-      render json: media_file, status: :created
+      render json: {
+        status: "success",
+        message: "Media file created successfully",
+        data: media_file
+      }, status: :created
     else
-      render json: { errors: media_file.errors }, status: :unprocessable_entity
+      render json: {
+        status: "error",
+        message: "Media file creation failed",
+        data: media_file.errors
+      }, status: :unprocessable_entity
     end
   end
 
@@ -36,9 +52,17 @@ class Api::V1::MediaFilesController < ApplicationController
     authorize! :update, parent_course_for(@media_file.mediable)
 
     if @media_file.update(media_file_params)
-      render json: @media_file
+      render json: {
+        status: "success",
+        message: "Media file updated successfully",
+        data: @media_file
+      }, status: :ok
     else
-      render json: { errors: @media_file.errors }, status: :unprocessable_entity
+      render json: {
+        status: "error",
+        message: "Media file update failed",
+        data: @media_file.errors
+      }, status: :unprocessable_entity
     end
   end
 
@@ -47,7 +71,11 @@ class Api::V1::MediaFilesController < ApplicationController
     authorize! :destroy, parent_course_for(@media_file.mediable)
 
     @media_file.destroy
-    head :no_content
+    render json: {
+      status: "success",
+      message: "Media file deleted successfully",
+      data: nil
+    }, status: :ok
   end
 
   private
@@ -62,7 +90,11 @@ class Api::V1::MediaFilesController < ApplicationController
 
     return if @mediable.present?
 
-    render json: { message: "Parent resource not found" }, status: :not_found
+    render json: {
+      status: "error",
+      message: "Parent resource not found",
+      data: nil
+    }, status: :not_found
   end
 
   def set_media_file

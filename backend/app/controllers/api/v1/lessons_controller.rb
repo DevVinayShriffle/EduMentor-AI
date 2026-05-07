@@ -7,14 +7,22 @@ class Api::V1::LessonsController < ApplicationController
     authorize! :read, @syllabus.course
 
     lessons = @syllabus.lessons.order(:position)
-    render json: lessons
+    render json: {
+      status: "success",
+      message: "Lessons fetched successfully",
+      data: lessons
+    }, status: :ok
   end
 
   # GET /lessons/:id
   def show
     authorize! :read, @lesson.syllabus.course
 
-    render json: @lesson, include: :media_files
+    render json: {
+      status: "success",
+      message: "Lesson fetched successfully",
+      data: @lesson.as_json(include: :media_files)
+    }, status: :ok
   end
 
   # POST /syllabuses/:syllabus_id/lessons
@@ -24,9 +32,17 @@ class Api::V1::LessonsController < ApplicationController
     lesson = @syllabus.lessons.build(lesson_params)
 
     if lesson.save
-      render json: lesson, status: :created
+      render json: {
+        status: "success",
+        message: "Lesson created successfully",
+        data: lesson
+      }, status: :created
     else
-      render json: { errors: lesson.errors }, status: :unprocessable_entity
+      render json: {
+        status: "error",
+        message: "Lesson creation failed",
+        data: lesson.errors
+      }, status: :unprocessable_entity
     end
   end
 
@@ -35,9 +51,17 @@ class Api::V1::LessonsController < ApplicationController
     authorize! :update, @lesson.syllabus.course
 
     if @lesson.update(lesson_params)
-      render json: @lesson
+      render json: {
+        status: "success",
+        message: "Lesson updated successfully",
+        data: @lesson
+      }, status: :ok
     else
-      render json: { errors: @lesson.errors }, status: :unprocessable_entity
+      render json: {
+        status: "error",
+        message: "Lesson update failed",
+        data: @lesson.errors
+      }, status: :unprocessable_entity
     end
   end
 
@@ -46,7 +70,11 @@ class Api::V1::LessonsController < ApplicationController
     authorize! :destroy, @lesson.syllabus.course
 
     @lesson.destroy
-    head :no_content
+    render json: {
+      status: "success",
+      message: "Lesson deleted successfully",
+      data: nil
+    }, status: :ok
   end
 
   private

@@ -11,4 +11,7 @@ class Course < ApplicationRecord
 
   has_many :enrollments
   has_many :students, through: :enrollments, source: :user
+  has_one :syllabus, dependent: :destroy
+  has_many :lessons, through: :syllabus
+  has_many :media_files, as: :mediable, dependent: :destroy
 end
