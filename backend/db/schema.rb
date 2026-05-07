@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_06_112749) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_07_060413) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -102,6 +102,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_06_112749) do
   add_foreign_key "courses", "users"
   add_foreign_key "enrollments", "courses"
   add_foreign_key "enrollments", "users"
-  add_foreign_key "media_files", "courses"
+  add_foreign_key "lessons", "syllabuses"
   add_foreign_key "media_files", "users"
+  add_foreign_key "syllabuses", "courses"
 end
