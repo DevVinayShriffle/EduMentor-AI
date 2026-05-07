@@ -151,6 +151,42 @@ class Api::V1::CoursesController < ApplicationController
     }, status: :ok
   end
 
+  # PATCH /courses/:id/upload_banner
+  def upload_banner
+    authorize! :update, @course
+
+    return render_error("Banner file missing") unless params[:banner]
+
+    if @course.banner_public_id.present?
+      CloudinaryService.destroy(
+        public_id: @course.banner_public_id
+      )
+    end
+
+    upload_result = CloudinaryService.upload(
+      file: params[:banner],
+      folder: "edumentor/courses/#{@course.id}/banner"
+    )
+
+    thumbnail_data = CloudinaryService.thumbnail_variant(
+      public_id: upload_result[:public_id]
+    )
+
+    @course.update!(
+      banner_url: upload_result[:url],
+      banner_public_id: upload_result[:public_id],
+      thumbnail_url: thumbnail_data[:url]
+    )
+
+    render json: {
+      message: "Banner uploaded successfully",
+      data: {
+        banner_url: @course.banner_url,
+        thumbnail_url: @course.thumbnail_url
+      }
+    }, status: :ok
+  end
+
   private
 
   def set_course
