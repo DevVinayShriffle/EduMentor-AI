@@ -9,37 +9,10 @@ class Course < ApplicationRecord
 
   before_destroy :remove_cloudinary_assets
 
-  has_many :enrollments,
-           dependent: :destroy
+  enum :status, { draft: 0, published: 1, archived: 2 }
+  enum :duration_type, { one_year: 0, two_year: 1 }
 
-  has_many :students,
-           through: :enrollments,
-           source: :user
-
-  # =========================
-  # Callbacks
-  # =========================
-  before_destroy :remove_cloudinary_assets
-
-  # =========================
-  # Enums
-  # =========================
-  enum :status, {
-    draft: 0,
-    published: 1,
-    archived: 2
-  }
-
-  enum :duration_type, {
-    one_year: 0,
-    two_year: 1
-  }
-
-  # =========================
-  # Validations
-  # =========================
   validates :title, presence: true
-  validates :description, presence: true
   validates :description, presence: true
   validates :duration_type, presence: true
   validates :status, presence: true
