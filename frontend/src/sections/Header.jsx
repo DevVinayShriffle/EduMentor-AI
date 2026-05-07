@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Globe } from "lucide-react";
 
-const Header = () => {
+const Header = ({ isDarkTheme = false }) => {
   const [language, setLanguage] = useState("EN");
   const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -26,8 +26,8 @@ const Header = () => {
         transition-transform duration-300
       "
       style={{
-        borderColor: "var(--border-soft)",
-        background: "rgba(255,255,255,0.86)",
+        borderColor: isDarkTheme ? "rgba(255,255,255,0.08)" : "var(--border-soft)",
+        background: isDarkTheme ? "rgba(2,6,23,0.74)" : "rgba(255,255,255,0.86)",
         backdropFilter: "blur(10px)",
         WebkitBackdropFilter: "blur(10px)",
         transform: isCollapsed ? "translateY(-100%)" : "translateY(0)",
@@ -40,7 +40,6 @@ const Header = () => {
           value={language}
           onChange={(e) => setLanguage(e.target.value)}
           className="
-            bg-black 
             text-white
             text-xs 
             outline-none 
@@ -49,6 +48,10 @@ const Header = () => {
             py-1
             rounded-xl
           "
+          style={{
+            background: isDarkTheme ? "rgba(255,255,255,0.10)" : "#000000",
+            border: isDarkTheme ? "1px solid rgba(255,255,255,0.1)" : "none",
+          }}
         >
           <option value="EN">EN</option>
           <option value="HI">हिंदी</option>

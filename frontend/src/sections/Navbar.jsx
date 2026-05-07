@@ -4,6 +4,8 @@ import logoImage from "../assets/images/edumentor-logo-no-bg.png";
 
 export default function Navbar({
   isAuthenticated,
+  isDarkTheme = false,
+  onThemeToggle,
   onLoginClick,
   onDashboardClick,
   onLogoutClick,
@@ -28,27 +30,28 @@ export default function Navbar({
       .map((link) => document.getElementById(link.path.replace("#", "")))
       .filter(Boolean);
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntry = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    const updateActiveSection = () => {
+      const viewportMarker = window.scrollY + window.innerHeight * 0.35;
 
-        if (visibleEntry) {
-          setActive(`#${visibleEntry.target.id}`);
-        }
-      },
-      {
-        rootMargin: "-30% 0px -45% 0px",
-        threshold: [0.2, 0.4, 0.6]
+      const matchingSection = sections.find((section) => {
+        const sectionTop = section.offsetTop - 80;
+        const sectionBottom = sectionTop + section.offsetHeight;
+
+        return viewportMarker >= sectionTop && viewportMarker < sectionBottom;
+      });
+
+      if (matchingSection) {
+        setActive(`#${matchingSection.id}`);
       }
-    );
+    };
 
-    sections.forEach((section) => observer.observe(section));
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
 
     return () => {
-      sections.forEach((section) => observer.unobserve(section));
-      observer.disconnect();
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
     };
   }, []);
 
@@ -111,21 +114,81 @@ export default function Navbar({
 
   return (
     <>
+      <style>{`
+        .landing-theme-switch {
+          font-size: 17px;
+          position: relative;
+          display: inline-block;
+          width: 3.5em;
+          height: 2em;
+        }
+
+        .landing-theme-switch input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+
+        .landing-theme-switch .slider {
+          --background: #28096b;
+          position: absolute;
+          cursor: pointer;
+          inset: 0;
+          background-color: var(--background);
+          transition: 0.5s;
+          border-radius: 30px;
+        }
+
+        .landing-theme-switch .slider:before {
+          position: absolute;
+          content: "";
+          height: 1.4em;
+          width: 1.4em;
+          border-radius: 50%;
+          left: 10%;
+          bottom: 15%;
+          box-shadow: inset 8px -4px 0 0 #fff000;
+          background: var(--background);
+          transition: 0.5s;
+        }
+
+        .landing-theme-switch input:checked + .slider {
+          background-color: #522ba7;
+        }
+
+        .landing-theme-switch input:checked + .slider:before {
+          transform: translateX(100%);
+          box-shadow: inset 15px -4px 0 15px #fff000;
+        }
+      `}</style>
+
       <header
         className={`fixed left-0 z-[100] w-full border-b backdrop-blur-md transition-[top,box-shadow,background-color] duration-300 ${isPinned ? "top-0" : "top-[29px]"
           }`}
         style={{
-          background: isPinned
-            ? "rgba(255, 255, 255, 0.82)"
-            : "rgba(255, 255, 255, 0.58)",
-          borderColor: isPinned
-            ? "rgba(148, 163, 184, 0.28)"
-            : "rgba(255, 255, 255, 0.22)",
+          background: isDarkTheme
+            ? isPinned
+              ? "rgba(2, 6, 23, 0.82)"
+              : "rgba(2, 6, 23, 0.58)"
+            : isPinned
+              ? "rgba(255, 255, 255, 0.82)"
+              : "rgba(255, 255, 255, 0.58)",
+          borderColor: isDarkTheme
+            ? isPinned
+              ? "rgba(255, 255, 255, 0.10)"
+              : "rgba(255, 255, 255, 0.08)"
+            : isPinned
+              ? "rgba(148, 163, 184, 0.28)"
+              : "rgba(255, 255, 255, 0.22)",
           backdropFilter: "blur(18px) saturate(160%)",
           WebkitBackdropFilter: "blur(18px) saturate(160%)",
-          boxShadow: isPinned
-            ? "0 10px 34px rgba(15, 23, 42, 0.16)"
-            : "0 6px 24px rgba(15, 23, 42, 0.08)",
+          boxShadow: isDarkTheme
+            ? isPinned
+              ? "0 18px 40px rgba(2, 6, 23, 0.40)"
+              : "0 10px 30px rgba(2, 6, 23, 0.26)"
+            : isPinned
+              ? "0 10px 34px rgba(15, 23, 42, 0.16)"
+              : "0 6px 24px rgba(15, 23, 42, 0.08)",
         }}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
@@ -133,9 +196,17 @@ export default function Navbar({
             href="#home"
             onClick={(event) => handleNavClick(event, "#home")}
             className="flex cursor-pointer items-center gap-2 whitespace-nowrap text-lg font-semibold tracking-tight sm:text-xl"
-            style={{ color: "#0f172a" }}
+            style={{ color: isDarkTheme ? "#f8fafc" : "#0f172a" }}
           >
-            <img src={logoImage} alt="EduMentor AI logo" className="h-9 w-auto" />
+            <div
+              className={`flex h-11 w-11 items-center justify-center rounded-full ${
+                isDarkTheme
+                  ? "bg-white/95 p-1 shadow-[0_0_22px_rgba(255,255,255,0.82),0_0_50px_rgba(129,140,248,0.55),0_14px_38px_rgba(15,23,42,0.45)]"
+                  : ""
+              }`}
+            >
+              <img src={logoImage} alt="EduMentor AI logo" className="h-8 w-auto" />
+            </div>
             EduMentor<span style={{ color: "var(--accent-primary)" }}>AI</span>
           </a>
 
@@ -149,8 +220,8 @@ export default function Navbar({
                 style={{
                   color:
                     active === link.path
-                      ? "#0f172a"
-                      : "#475569",
+                      ? isDarkTheme ? "#f8fafc" : "#0f172a"
+                      : isDarkTheme ? "#cbd5e1" : "#475569",
                 }}
               >
                 {link.name}
@@ -169,6 +240,15 @@ export default function Navbar({
 
           {/* Right */}
           <div className="flex items-center gap-2 sm:gap-3">
+            <label className="landing-theme-switch hidden shrink-0 md:inline-block" aria-label="Toggle global theme">
+              <input
+                type="checkbox"
+                checked={isDarkTheme}
+                onChange={onThemeToggle}
+              />
+              <span className="slider" />
+            </label>
+
             {isAuthenticated ? (
               <>
                 <button type="button" onClick={onDashboardClick} className="hidden md:block text-xs sm:text-sm px-3 py-1.5 rounded-md transition-all hover:scale-[1.03]" style={{color: "#fff", background: "linear-gradient(135deg, #2563eb, #4f46e5, #7c3aed)", boxShadow: "0 10px 24px rgba(79, 70, 229, 0.28)"}}>
@@ -190,7 +270,7 @@ export default function Navbar({
               aria-label={open ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={open}
               className="rounded-md p-2 transition-colors md:hidden"
-              style={{ color: "#0f172a" }}
+              style={{ color: isDarkTheme ? "#f8fafc" : "#0f172a" }}
               onClick={() => setOpen(!open)}
             >
               {open ? (
@@ -222,8 +302,8 @@ export default function Navbar({
         className={`fixed right-0 top-0 z-[110] h-dvh w-[min(22rem,78vw)] overflow-y-auto border-l shadow-2xl transition-transform duration-300 md:hidden ${open ? "translate-x-0" : "translate-x-full"
           }`}
         style={{
-          background: "rgba(255,255,255,1)",
-          borderColor: "var(--border-soft)",
+          background: isDarkTheme ? "rgba(2,6,23,0.98)" : "rgba(255,255,255,1)",
+          borderColor: isDarkTheme ? "rgba(255,255,255,0.10)" : "var(--border-soft)",
         }}
       >
         <div className="flex items-center justify-between border-b px-5 py-4">
@@ -231,21 +311,40 @@ export default function Navbar({
             href="#home"
             onClick={(event) => handleNavClick(event, "#home")}
             className="flex cursor-pointer items-center gap-2 whitespace-nowrap text-base font-semibold tracking-tight"
-            style={{ color: "#0f172a" }}
+            style={{ color: isDarkTheme ? "#f8fafc" : "#0f172a" }}
           >
-            <img src={logoImage} alt="EduMentor AI logo" className="h-8 w-auto" />
+            <div
+              className={`flex h-10 w-10 items-center justify-center rounded-full ${
+                isDarkTheme
+                  ? "bg-white/95 p-1 shadow-[0_0_22px_rgba(255,255,255,0.82),0_0_50px_rgba(129,140,248,0.55),0_14px_38px_rgba(15,23,42,0.45)]"
+                  : ""
+              }`}
+            >
+              <img src={logoImage} alt="EduMentor AI logo" className="h-7 w-auto" />
+            </div>
             EduMentor<span style={{ color: "var(--accent-primary)" }}>AI</span>
           </a>
 
-          <button
-            type="button"
-            aria-label="Close navigation menu"
-            className="rounded-md p-2 transition-colors"
-            style={{ color: "#0f172a" }}
-            onClick={closeMobileMenu}
-          >
-            <X size={20} />
-          </button>
+          <div className="flex items-center gap-2">
+            <label className="landing-theme-switch shrink-0 md:hidden" aria-label="Toggle global theme">
+              <input
+                type="checkbox"
+                checked={isDarkTheme}
+                onChange={onThemeToggle}
+              />
+              <span className="slider" />
+            </label>
+
+            <button
+              type="button"
+              aria-label="Close navigation menu"
+              className="rounded-md p-2 transition-colors"
+              style={{ color: isDarkTheme ? "#f8fafc" : "#0f172a" }}
+              onClick={closeMobileMenu}
+            >
+              <X size={20} />
+            </button>
+          </div>
         </div>
 
         <div className="flex flex-col gap-3 px-4 py-6 text-base">
@@ -258,10 +357,14 @@ export default function Navbar({
               style={{
                 color:
                   active === link.path
-                    ? "#0f172a"
-                    : "#475569",
+                    ? isDarkTheme ? "#f8fafc" : "#0f172a"
+                    : isDarkTheme ? "#cbd5e1" : "#475569",
                 background:
-                  active === link.path ? "rgba(99, 102, 241, 0.10)" : "transparent",
+                  active === link.path
+                    ? isDarkTheme
+                      ? "rgba(99, 102, 241, 0.18)"
+                      : "rgba(99, 102, 241, 0.10)"
+                    : "transparent",
               }}
             >
               {link.name}
@@ -323,4 +426,3 @@ export default function Navbar({
     </>
   );
 }
-
