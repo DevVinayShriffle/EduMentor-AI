@@ -10,6 +10,11 @@ Rails.application.routes.draw do
       resources :courses do
         resource :syllabus, only: [:show, :create, :update, :destroy]
         resources :media_files, only: [:index, :create]
+
+        member do
+          patch :upload_thumbnail
+          patch :upload_banner
+        end
       end
 
       resources :syllabuses, only: [] do
