@@ -1,11 +1,7 @@
 class User < ApplicationRecord
   include Devise::JWT::RevocationStrategies::JTIMatcher
 
-  enum :role, {
-    student: 0,
-    teacher: 1,
-    admin: 2
-  }
+  enum :role, { student: 0, teacher: 1, admin: 2 }
 
   validates :phone_number, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
@@ -17,27 +13,16 @@ class User < ApplicationRecord
          :jwt_authenticatable,
          jwt_revocation_strategy: self
 
-  # =========================
-  # Teacher Associations
-  # =========================
   has_many :courses,
            foreign_key: :user_id,
            dependent: :destroy
 
-  # =========================
-  # Student Associations
-  # =========================
   has_many :enrollments,
            dependent: :destroy
-
   has_many :enrolled_courses,
            -> { where(enrollments: { status: :active }) },
            through: :enrollments,
            source: :course
-
-  # =========================
-  # Uploads
-  # =========================
   has_many :media_files,
            dependent: :destroy
 end

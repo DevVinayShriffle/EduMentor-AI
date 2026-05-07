@@ -48,16 +48,51 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_07_072706) do
     t.index ["user_id"], name: "index_enrollments_on_user_id"
   end
 
-  create_table "media_files", force: :cascade do |t|
-    t.bigint "course_id", null: false
+  create_table "lessons", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.text "description"
+    t.integer "estimated_duration_minutes", default: 0, null: false
+    t.integer "lesson_type", default: 0, null: false
+    t.integer "position", default: 0, null: false
+    t.integer "status", default: 0, null: false
+    t.bigint "syllabus_id", null: false
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
+    t.index ["syllabus_id", "position"], name: "index_lessons_on_syllabus_id_and_position"
+    t.index ["syllabus_id"], name: "index_lessons_on_syllabus_id"
+  end
+
+  create_table "media_files", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.integer "duration_seconds", default: 0, null: false
+    t.integer "file_type", default: 0, null: false
     t.string "file_url"
+    t.boolean "free_preview", default: false, null: false
+    t.bigint "mediable_id", null: false
+    t.string "mediable_type", null: false
+    t.integer "position", default: 0, null: false
+    t.integer "provider", default: 0, null: false
     t.string "public_id"
     t.string "resource_type"
+    t.integer "status", default: 0, null: false
+    t.string "thumbnail_url"
+    t.string "title"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.index ["course_id"], name: "index_media_files_on_course_id"
+    t.index ["mediable_type", "mediable_id", "position"], name: "idx_on_mediable_type_mediable_id_position_2f97f05572"
+    t.index ["mediable_type", "mediable_id"], name: "index_media_files_on_mediable"
     t.index ["user_id"], name: "index_media_files_on_user_id"
+  end
+
+  create_table "syllabuses", force: :cascade do |t|
+    t.bigint "course_id", null: false
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.integer "status", default: 0, null: false
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_syllabuses_on_course_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -80,6 +115,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_07_072706) do
   add_foreign_key "courses", "users"
   add_foreign_key "enrollments", "courses"
   add_foreign_key "enrollments", "users"
-  add_foreign_key "media_files", "courses"
+  add_foreign_key "lessons", "syllabuses"
   add_foreign_key "media_files", "users"
+  add_foreign_key "syllabuses", "courses"
 end
