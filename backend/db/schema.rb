@@ -10,16 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_06_112749) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_07_072706) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "courses", force: :cascade do |t|
+    t.string "banner_public_id"
+    t.string "banner_url"
+    t.string "class_level"
     t.datetime "created_at", null: false
+    t.string "currency", default: "INR", null: false
     t.text "description"
     t.integer "duration_type"
+    t.date "ends_on"
+    t.boolean "featured", default: false, null: false
+    t.string "language"
+    t.decimal "price", precision: 10, scale: 2, default: "0.0", null: false
+    t.date "starts_on"
     t.integer "status"
+    t.string "target_exam"
+    t.string "thumbnail_url"
     t.string "title"
+    t.integer "total_lessons", default: 0, null: false
+    t.integer "total_tests", default: 0, null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_courses_on_user_id"
