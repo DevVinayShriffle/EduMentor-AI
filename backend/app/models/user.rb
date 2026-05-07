@@ -23,6 +23,8 @@ class User < ApplicationRecord
            -> { where(enrollments: { status: :active }) },
            through: :enrollments,
            source: :course
+  has_one :profile,
+          dependent: :destroy
   has_many :media_files,
            dependent: :destroy
 end

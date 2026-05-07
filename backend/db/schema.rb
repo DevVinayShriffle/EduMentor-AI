@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_07_072706) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_07_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -85,6 +85,27 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_07_072706) do
     t.index ["user_id"], name: "index_media_files_on_user_id"
   end
 
+  create_table "profiles", force: :cascade do |t|
+    t.text "address"
+    t.string "avatar_url"
+    t.text "bio"
+    t.string "city"
+    t.string "class_level"
+    t.string "country"
+    t.datetime "created_at", null: false
+    t.date "date_of_birth"
+    t.string "full_name"
+    t.string "gender"
+    t.string "guardian_name"
+    t.string "guardian_phone"
+    t.string "school_or_college"
+    t.string "state"
+    t.string "target_exam"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id", unique: true
+  end
+
   create_table "syllabuses", force: :cascade do |t|
     t.bigint "course_id", null: false
     t.datetime "created_at", null: false
@@ -117,5 +138,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_07_072706) do
   add_foreign_key "enrollments", "users"
   add_foreign_key "lessons", "syllabuses"
   add_foreign_key "media_files", "users"
+  add_foreign_key "profiles", "users"
   add_foreign_key "syllabuses", "courses"
 end

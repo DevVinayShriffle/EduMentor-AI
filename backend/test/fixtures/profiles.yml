@@ -1,0 +1,33 @@
+one:
+  user: one
+  full_name: Student One
+  avatar_url: https://example.com/avatar-one.jpg
+  date_of_birth: 2005-01-15
+  gender: female
+  city: Delhi
+  state: Delhi
+  country: India
+  address: Example address one
+  school_or_college: Example School
+  class_level: 12
+  target_exam: JEE Main
+  guardian_name: Guardian One
+  guardian_phone: "9999999991"
+  bio: Profile fixture one
+
+two:
+  user: two
+  full_name: Student Two
+  avatar_url: https://example.com/avatar-two.jpg
+  date_of_birth: 2004-09-20
+  gender: male
+  city: Mumbai
+  state: Maharashtra
+  country: India
+  address: Example address two
+  school_or_college: Example College
+  class_level: 11
+  target_exam: NEET
+  guardian_name: Guardian Two
+  guardian_phone: "9999999992"
+  bio: Profile fixture two
