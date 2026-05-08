@@ -33,7 +33,6 @@ export default function TeacherDashboard({ isDarkTheme, onThemeToggle }) {
       <div className="lg:pl-[18.5rem]">
         <TeacherNavbar
           user={user}
-          roleLabel="Teacher"
           isDarkTheme={isDarkTheme}
           onThemeToggle={onThemeToggle}
           onMenuToggle={() => setIsSidebarOpen(true)}
