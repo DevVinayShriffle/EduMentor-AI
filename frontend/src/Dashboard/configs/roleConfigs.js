@@ -1,95 +1,4 @@
 const roleConfigs = {
-  student: {
-    label: "Student",
-    home: {
-      eyebrow: "Student Dashboard",
-      title: "Stay on track with structured learning and visible progress.",
-      description:
-        "Review your learning plan, continue revision, solve doubts with AI, and keep your daily quiz rhythm moving.",
-      cards: [
-        {
-          label: "Next Action",
-          value: "Continue revision shorts",
-          text: "Resume the current module and rewatch key concept clips before your next class.",
-        },
-        {
-          label: "Practice Rhythm",
-          value: "Daily quiz pending",
-          text: "Keep momentum by attempting today's AI-generated quiz and checking your score trend.",
-        },
-        {
-          label: "Dashboard Focus",
-          value: "Progress analytics",
-          text: "Track completion, test results, and improvement points from one role-specific home.",
-        },
-      ],
-    },
-    navigation: [
-      {
-        id: "dashboard",
-        label: "Dashboard",
-        itemId: "dashboard-home",
-        items: [],
-      },
-      {
-        id: "learn",
-        label: "Learn",
-        items: [
-          { id: "my-courses", label: "My Courses" },
-          { id: "recordings", label: "Recordings" },
-          { id: "shorts", label: "Shorts" },
-          { id: "materials", label: "Materials" },
-        ],
-      },
-      {
-        id: "live-classes",
-        label: "Live Classes",
-        items: [
-          { id: "upcoming-classes", label: "Upcoming Classes" },
-          { id: "attendance", label: "Attendance" },
-        ],
-      },
-      {
-        id: "ai-tutor",
-        label: "AI Tutor",
-        items: [
-          { id: "text-doubts", label: "Text Doubts" },
-          { id: "image-doubts", label: "Image Doubts" },
-          { id: "doubt-history", label: "Doubt History" },
-        ],
-      },
-      {
-        id: "tests",
-        label: "Tests",
-        items: [
-          { id: "daily-quiz", label: "Daily Quiz" },
-          { id: "weekly-exams", label: "Weekly Exams" },
-          { id: "past-results", label: "Past Results" },
-        ],
-      },
-      {
-        id: "performance",
-        label: "Performance",
-        items: [
-          { id: "progress-tracking", label: "Progress Tracking" },
-          { id: "weak-topics", label: "Weak Topics" },
-        ],
-      },
-      {
-        id: "payments",
-        label: "Payments",
-        items: [
-          { id: "subscriptions", label: "Subscriptions" },
-          { id: "billing-history", label: "Billing History" },
-        ],
-      },
-      {
-        id: "profile",
-        label: "Profile",
-        items: [{ id: "settings", label: "Settings" }],
-      },
-    ],
-  },
   admin: {
     label: "Admin",
     home: {
@@ -196,5 +105,5 @@ const roleConfigs = {
 };
 
 export function getRoleConfig(role) {
-  return roleConfigs[role] || roleConfigs.student;
+  return roleConfigs[role] || roleConfigs.admin;
 }

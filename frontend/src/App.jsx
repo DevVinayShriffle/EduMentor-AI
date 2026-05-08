@@ -49,7 +49,7 @@ export default function App() {
           <Route
             path="/dashboard"
             element={(
-              <ProtectedRoute>
+              <ProtectedRoute allowedRoles={["admin"]}>
                 <DashboardPage
                   isDarkTheme={isDarkTheme}
                   onThemeToggle={() => setIsDarkTheme((current) => !current)}

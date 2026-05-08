@@ -12,6 +12,7 @@ import Footer from "../sections/Footer";
 import Header from "../sections/Header";
 import AuthDrawer from "../components/AuthDrawer";
 import { useAuth } from "../context/AuthContext";
+import { getAppHomePath } from "../utils/getAppHomePath";
 
 export default function LandingPage({ isDarkTheme, onThemeToggle }) {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ export default function LandingPage({ isDarkTheme, onThemeToggle }) {
 
   const handleAuthSuccess = (nextUser) => {
     setIsAuthOpen(false);
-    navigate(nextUser?.role === "teacher" ? "/teacher" : "/dashboard");
+    navigate(getAppHomePath(nextUser?.role));
   };
 
   const handleLogout = async () => {
@@ -46,13 +47,13 @@ export default function LandingPage({ isDarkTheme, onThemeToggle }) {
         onThemeToggle={onThemeToggle}
         onLoginClick={() => openAuth("login")}
         onSignupClick={() => openAuth("signup")}
-        onDashboardClick={() => navigate(user?.role === "teacher" ? "/teacher" : "/dashboard")}
+        onDashboardClick={() => navigate(getAppHomePath(user?.role))}
         onLogoutClick={handleLogout}
       />
       <Hero
         onGetStarted={() => {
           if (isAuthenticated) {
-            navigate(user?.role === "teacher" ? "/teacher" : "/dashboard");
+            navigate(getAppHomePath(user?.role));
             return;
           }
 
