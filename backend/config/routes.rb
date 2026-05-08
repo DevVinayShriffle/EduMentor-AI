@@ -21,6 +21,8 @@ Rails.application.routes.draw do
       end
 
       get "/my-courses", to: "enrollments#my_courses"
+
+      post "ai_tutor/chat", to: "ai_tutor#chat"
     end
   end
 

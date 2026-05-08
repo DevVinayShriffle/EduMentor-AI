@@ -59,3 +59,5 @@ gem 'sidekiq'
 gem 'redis'
 gem "cloudinary"
 gem "jsonapi-serializer"
+gem "httparty"
+gem "byebug"

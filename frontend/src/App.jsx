@@ -4,6 +4,7 @@ import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import LandingPage from "./pages/LandingPage";
 import DashboardPage from "./Dashboard/Pages/DashboardPage";
+import AiTutorPage from "./features/ai-tutor/pages/AiTutorPage";
 
 export default function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(() => {
@@ -31,15 +32,22 @@ export default function App() {
           />
           <Route
             path="/dashboard"
-            element={(
+            element={
               <ProtectedRoute>
                 <DashboardPage
                   isDarkTheme={isDarkTheme}
                   onThemeToggle={() => setIsDarkTheme((current) => !current)}
                 />
               </ProtectedRoute>
-            )}
-          />
+            }
+          >
+            {/* Nested AI Tutor Route */}
+            <Route
+              path="ai-tutor"
+              element={<AiTutorPage />}
+            />
+          </Route>
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>

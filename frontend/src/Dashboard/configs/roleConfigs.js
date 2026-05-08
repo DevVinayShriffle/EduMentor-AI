@@ -52,6 +52,7 @@ const roleConfigs = {
       {
         id: "ai-tutor",
         label: "AI Tutor",
+        itemId: "ai-tutor",
         items: [
           { id: "text-doubts", label: "Text Doubts" },
           { id: "image-doubts", label: "Image Doubts" },
