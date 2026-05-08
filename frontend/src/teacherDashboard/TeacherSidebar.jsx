@@ -4,20 +4,22 @@ import {
   Bot,
   ClipboardList,
   Home,
+  LogOut,
   User,
   Users,
   X,
 } from "lucide-react";
+import { NavLink } from "react-router-dom";
 import logoImage from "../assets/images/edumentor-logo-no-bg.png";
 
 const sidebarItems = [
-  { label: "Dashboard", icon: Home },
-  { label: "Content", icon: BookOpen },
-  { label: "Assessments", icon: ClipboardList },
-  { label: "Students", icon: Users },
-  { label: "Reports", icon: BarChart3 },
-  { label: "Chatbot", icon: Bot },
-  { label: "Profile", icon: User },
+  { label: "Dashboard", icon: Home, to: "/teacher", end: true },
+  { label: "Content", icon: BookOpen, to: "/teacher/content" },
+  { label: "Assessments", icon: ClipboardList, to: "/teacher/assessments" },
+  { label: "Students", icon: Users, to: "/teacher/students" },
+  { label: "Reports", icon: BarChart3, to: "/teacher/reports" },
+  { label: "Chatbot", icon: Bot, to: "/teacher/chatbot" },
+  { label: "Profile", icon: User, to: "/teacher/profile" },
 ];
 
 export default function TeacherSidebar({
@@ -25,7 +27,19 @@ export default function TeacherSidebar({
   isDarkTheme,
   onBackToSite,
   onClose,
+  onLogout,
 }) {
+  const getNavItemClassName = (isActive) =>
+    `flex items-center gap-3 rounded-2xl px-3 py-3 text-sm font-semibold transition ${
+      isActive
+        ? isDarkTheme
+          ? "bg-white/12 text-white shadow-inner shadow-fuchsia-500/10 ring-1 ring-fuchsia-400/25"
+          : "bg-indigo-100 text-indigo-950 shadow-inner shadow-indigo-200/60"
+        : isDarkTheme
+          ? "text-slate-300 hover:bg-white/8 hover:text-white"
+          : "text-slate-600 hover:bg-white/75 hover:text-slate-950"
+    }`;
+
   return (
     <>
       <div
@@ -103,8 +117,23 @@ export default function TeacherSidebar({
         </div>
 
         <div className="flex-1 overflow-y-auto px-4 py-5">
+          <nav className="mt-6 space-y-2">
+            {sidebarItems.map(({ label, icon: Icon, to, end }) => (
+              <NavLink
+                key={label}
+                to={to}
+                end={end}
+                onClick={onClose}
+                className={({ isActive }) => getNavItemClassName(isActive)}
+              >
+                <Icon size={18} className="shrink-0" />
+                <span>{label}</span>
+              </NavLink>
+            ))}
+          </nav>
+
           <div
-            className={`rounded-[28px] border px-4 py-4 ${
+            className={`mt-8 rounded-[28px] border px-4 py-4 ${
               isDarkTheme
                 ? "border-white/10 bg-white/5"
                 : "border-white/70 bg-white/80"
@@ -115,33 +144,21 @@ export default function TeacherSidebar({
                 isDarkTheme ? "text-fuchsia-200" : "text-blue-700"
               }`}
             >
-              Phase 2 Shell
+              Quick Actions
             </p>
-            <p
-              className={`mt-3 text-sm leading-6 ${
-                isDarkTheme ? "text-slate-300" : "text-slate-600"
+            <button
+              type="button"
+              onClick={onLogout}
+              className={`mt-4 flex w-full items-center gap-3 rounded-2xl px-3 py-3 text-sm font-semibold transition ${
+                isDarkTheme
+                  ? "bg-white/8 text-slate-200 hover:bg-white/12 hover:text-white"
+                  : "bg-white text-slate-700 shadow-sm hover:bg-slate-50 hover:text-slate-950"
               }`}
             >
-              The routed teacher shell is now active. URL-driven active navigation will be finalized in
-              Phase 3.
-            </p>
+              <LogOut size={18} className="shrink-0" />
+              <span>Logout</span>
+            </button>
           </div>
-
-          <nav className="mt-6 space-y-2">
-            {sidebarItems.map(({ label, icon: Icon }) => (
-              <div
-                key={label}
-                className={`flex items-center gap-3 rounded-2xl px-3 py-3 text-sm font-semibold ${
-                  isDarkTheme
-                    ? "text-slate-300 hover:bg-white/8 hover:text-white"
-                    : "text-slate-600 hover:bg-white/75 hover:text-slate-950"
-                }`}
-              >
-                <Icon size={18} className="shrink-0" />
-                <span>{label}</span>
-              </div>
-            ))}
-          </nav>
         </div>
       </aside>
     </>

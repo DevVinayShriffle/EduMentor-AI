@@ -27,6 +27,7 @@ export default function TeacherDashboard({ isDarkTheme, onThemeToggle }) {
         isDarkTheme={isDarkTheme}
         onClose={() => setIsSidebarOpen(false)}
         onBackToSite={() => navigate("/")}
+        onLogout={handleLogout}
       />
 
       <div className="lg:pl-[18.5rem]">
