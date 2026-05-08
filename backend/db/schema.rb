@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_07_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_08_071044) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -60,6 +60,43 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_07_120000) do
     t.datetime "updated_at", null: false
     t.index ["syllabus_id", "position"], name: "index_lessons_on_syllabus_id_and_position"
     t.index ["syllabus_id"], name: "index_lessons_on_syllabus_id"
+  end
+
+  create_table "live_class_attendances", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "duration_seconds", default: 0, null: false
+    t.datetime "joined_at"
+    t.datetime "left_at"
+    t.bigint "live_class_id", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["live_class_id", "user_id"], name: "index_live_class_attendances_on_live_class_id_and_user_id", unique: true
+    t.index ["live_class_id"], name: "index_live_class_attendances_on_live_class_id"
+    t.index ["user_id"], name: "index_live_class_attendances_on_user_id"
+  end
+
+  create_table "live_classes", force: :cascade do |t|
+    t.bigint "course_id", null: false
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.datetime "ended_at"
+    t.bigint "lesson_id"
+    t.string "meeting_provider", default: "jitsi", null: false
+    t.boolean "recording_enabled", default: true, null: false
+    t.string "room_name", null: false
+    t.datetime "scheduled_end_time"
+    t.datetime "scheduled_start_time", null: false
+    t.datetime "started_at"
+    t.integer "status", default: 0, null: false
+    t.bigint "teacher_id", null: false
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id", "scheduled_start_time"], name: "index_live_classes_on_course_id_and_scheduled_start_time"
+    t.index ["course_id"], name: "index_live_classes_on_course_id"
+    t.index ["lesson_id"], name: "index_live_classes_on_lesson_id"
+    t.index ["room_name"], name: "index_live_classes_on_room_name", unique: true
+    t.index ["teacher_id", "scheduled_start_time"], name: "index_live_classes_on_teacher_id_and_scheduled_start_time"
+    t.index ["teacher_id"], name: "index_live_classes_on_teacher_id"
   end
 
   create_table "media_files", force: :cascade do |t|
@@ -137,6 +174,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_07_120000) do
   add_foreign_key "enrollments", "courses"
   add_foreign_key "enrollments", "users"
   add_foreign_key "lessons", "syllabuses"
+  add_foreign_key "live_class_attendances", "live_classes"
+  add_foreign_key "live_class_attendances", "users"
+  add_foreign_key "live_classes", "courses"
+  add_foreign_key "live_classes", "lessons"
+  add_foreign_key "live_classes", "users", column: "teacher_id"
   add_foreign_key "media_files", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "syllabuses", "courses"
