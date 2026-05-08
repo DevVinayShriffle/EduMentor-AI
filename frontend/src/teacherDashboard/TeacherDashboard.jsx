@@ -22,22 +22,10 @@ export default function TeacherDashboard({ isDarkTheme, onThemeToggle }) {
           : "bg-[radial-gradient(circle_at_top_left,_rgba(96,165,250,0.14),_transparent_24%),linear-gradient(180deg,_#f7faff_0%,_#eef4ff_100%)]"
       }`}
     >
-      <TeacherSidebar
-        isOpen={isSidebarOpen}
-        isDarkTheme={isDarkTheme}
-        onClose={() => setIsSidebarOpen(false)}
-        onBackToSite={() => navigate("/")}
-        onLogout={handleLogout}
-      />
+      <TeacherSidebar isOpen={isSidebarOpen} isDarkTheme={isDarkTheme} onClose={() => setIsSidebarOpen(false)} onBackToSite={() => navigate("/")} onLogout={handleLogout} />
 
       <div className="lg:pl-[18.5rem]">
-        <TeacherNavbar
-          user={user}
-          isDarkTheme={isDarkTheme}
-          onThemeToggle={onThemeToggle}
-          onMenuToggle={() => setIsSidebarOpen(true)}
-          onLogout={handleLogout}
-        />
+        <TeacherNavbar user={user} isDarkTheme={isDarkTheme} onThemeToggle={onThemeToggle} onMenuToggle={() => setIsSidebarOpen(true)} onLogout={handleLogout} />
 
         <main className="px-4 py-6 sm:px-6 lg:px-8">
           <Outlet context={{ isDarkTheme }} />

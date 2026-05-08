@@ -14,9 +14,7 @@ export default function StudentPerformance() {
     { label: "Differentiation", value: 89 },
   ];
   const weakTopics = ["Reaction mechanism recall", "Time pressure in integration", "Physics derivation retention"];
-  const cardClass = isDarkTheme
-    ? "border-white/10 bg-[linear-gradient(180deg,rgba(15,23,42,0.82),rgba(17,24,39,0.9))] text-slate-100 shadow-[0_24px_70px_rgba(2,6,23,0.34)]"
-    : "border-white/75 bg-white/92 text-slate-900 shadow-[0_20px_60px_rgba(37,99,235,0.08)]";
+  const cardClass = isDarkTheme ? "border-white/10 bg-[linear-gradient(180deg,rgba(15,23,42,0.82),rgba(17,24,39,0.9))] text-slate-100 shadow-[0_24px_70px_rgba(2,6,23,0.34)]" : "border-white/75 bg-white/92 text-slate-900 shadow-[0_20px_60px_rgba(37,99,235,0.08)]";
   const mutedClass = isDarkTheme ? "text-slate-300" : "text-slate-600";
   const accentClass = isDarkTheme ? "text-cyan-300" : "text-sky-700";
 
@@ -24,9 +22,7 @@ export default function StudentPerformance() {
     <div className="space-y-6">
       <section className={`rounded-[32px] border p-6 md:p-8 ${cardClass}`}>
         <p className={`text-xs font-semibold uppercase tracking-[0.22em] ${accentClass}`}>Performance</p>
-        <h1 className="mt-4 text-3xl font-bold tracking-tight md:text-4xl">
-          Track progress, find weak spots, and keep improvement visible.
-        </h1>
+        <h1 className="mt-4 text-3xl font-bold tracking-tight md:text-4xl">Track progress, find weak spots, and keep improvement visible.</h1>
       </section>
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">

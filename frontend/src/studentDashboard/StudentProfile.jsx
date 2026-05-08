@@ -15,9 +15,7 @@ export default function StudentProfile() {
     { label: "Class Reminders", value: "30 mins before live class" },
     { label: "AI Study Support", value: "Enabled for doubt help" },
   ];
-  const cardClass = isDarkTheme
-    ? "border-white/10 bg-[linear-gradient(180deg,rgba(15,23,42,0.82),rgba(17,24,39,0.9))] text-slate-100 shadow-[0_24px_70px_rgba(2,6,23,0.34)]"
-    : "border-white/75 bg-white/92 text-slate-900 shadow-[0_20px_60px_rgba(37,99,235,0.08)]";
+  const cardClass = isDarkTheme ? "border-white/10 bg-[linear-gradient(180deg,rgba(15,23,42,0.82),rgba(17,24,39,0.9))] text-slate-100 shadow-[0_24px_70px_rgba(2,6,23,0.34)]" : "border-white/75 bg-white/92 text-slate-900 shadow-[0_20px_60px_rgba(37,99,235,0.08)]";
   const mutedClass = isDarkTheme ? "text-slate-300" : "text-slate-600";
   const accentClass = isDarkTheme ? "text-cyan-300" : "text-sky-700";
 
@@ -42,20 +40,7 @@ export default function StudentProfile() {
             {fields.map(([label, value]) => (
               <label key={label} className={label === "Bio" ? "md:col-span-2" : ""}>
                 <span className={`mb-2 block text-sm font-medium ${mutedClass}`}>{label}</span>
-                {label === "Bio" ? (
-                  <textarea
-                    value={value}
-                    readOnly
-                    rows={4}
-                    className={`w-full rounded-2xl border px-4 py-3 text-sm outline-none ${isDarkTheme ? "border-white/10 bg-white/5 text-white" : "border-slate-200 bg-white text-slate-900"}`}
-                  />
-                ) : (
-                  <input
-                    value={value}
-                    readOnly
-                    className={`w-full rounded-2xl border px-4 py-3 text-sm outline-none ${isDarkTheme ? "border-white/10 bg-white/5 text-white" : "border-slate-200 bg-white text-slate-900"}`}
-                  />
-                )}
+                {label === "Bio" ? <textarea value={value} readOnly rows={4} className={`w-full rounded-2xl border px-4 py-3 text-sm outline-none ${isDarkTheme ? "border-white/10 bg-white/5 text-white" : "border-slate-200 bg-white text-slate-900"}`} /> : <input value={value} readOnly className={`w-full rounded-2xl border px-4 py-3 text-sm outline-none ${isDarkTheme ? "border-white/10 bg-white/5 text-white" : "border-slate-200 bg-white text-slate-900"}`} />}
               </label>
             ))}
           </div>
@@ -73,7 +58,9 @@ export default function StudentProfile() {
           ))}
         </div>
         <div className="mt-5">
-          <button type="button" className={`rounded-2xl px-5 py-3 text-sm font-semibold text-white ${isDarkTheme ? "bg-gradient-to-r from-cyan-500/85 via-blue-500/85 to-indigo-500/85" : "bg-gradient-to-r from-sky-500 via-blue-500 to-indigo-500"}`}>Save Changes</button>
+          <button type="button" className={`rounded-2xl px-5 py-3 text-sm font-semibold text-white ${isDarkTheme ? "bg-gradient-to-r from-cyan-500/85 via-blue-500/85 to-indigo-500/85" : "bg-gradient-to-r from-sky-500 via-blue-500 to-indigo-500"}`}>
+            Save Changes
+          </button>
         </div>
       </section>
     </div>

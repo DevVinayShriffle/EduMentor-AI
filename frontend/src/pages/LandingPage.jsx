@@ -41,15 +41,7 @@ export default function LandingPage({ isDarkTheme, onThemeToggle }) {
   return (
     <div className={isDarkTheme ? "landing-theme-dark bg-slate-950 text-slate-100" : "bg-white text-gray-900"}>
       <Header isDarkTheme={isDarkTheme} />
-      <Navbar
-        isAuthenticated={isAuthenticated}
-        isDarkTheme={isDarkTheme}
-        onThemeToggle={onThemeToggle}
-        onLoginClick={() => openAuth("login")}
-        onSignupClick={() => openAuth("signup")}
-        onDashboardClick={() => navigate(getAppHomePath(user?.role))}
-        onLogoutClick={handleLogout}
-      />
+      <Navbar isAuthenticated={isAuthenticated} isDarkTheme={isDarkTheme} onThemeToggle={onThemeToggle} onLoginClick={() => openAuth("login")} onSignupClick={() => openAuth("signup")} onDashboardClick={() => navigate(getAppHomePath(user?.role))} onLogoutClick={handleLogout} />
       <Hero
         onGetStarted={() => {
           if (isAuthenticated) {
@@ -70,13 +62,7 @@ export default function LandingPage({ isDarkTheme, onThemeToggle }) {
       <MobileApp />
       <Contact />
       <Footer />
-      <AuthDrawer
-        isOpen={isAuthOpen}
-        mode={authMode}
-        onClose={closeAuth}
-        onModeChange={setAuthMode}
-        onSuccess={handleAuthSuccess}
-      />
+      <AuthDrawer isOpen={isAuthOpen} mode={authMode} onClose={closeAuth} onModeChange={setAuthMode} onSuccess={handleAuthSuccess} />
     </div>
   );
 }

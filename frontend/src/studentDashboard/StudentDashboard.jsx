@@ -22,22 +22,10 @@ export default function StudentDashboard({ isDarkTheme, onThemeToggle }) {
           : "bg-[radial-gradient(circle_at_top_left,_rgba(14,165,233,0.12),_transparent_24%),linear-gradient(180deg,_#f8fbff_0%,_#eef6ff_100%)]"
       }`}
     >
-      <StudentSidebar
-        isOpen={isSidebarOpen}
-        isDarkTheme={isDarkTheme}
-        onClose={() => setIsSidebarOpen(false)}
-        onBackToSite={() => navigate("/")}
-        onLogout={handleLogout}
-      />
+      <StudentSidebar isOpen={isSidebarOpen} isDarkTheme={isDarkTheme} onClose={() => setIsSidebarOpen(false)} onBackToSite={() => navigate("/")} onLogout={handleLogout} />
 
       <div className="lg:pl-[18.5rem]">
-        <StudentNavbar
-          user={user}
-          isDarkTheme={isDarkTheme}
-          onThemeToggle={onThemeToggle}
-          onMenuToggle={() => setIsSidebarOpen(true)}
-          onLogout={handleLogout}
-        />
+        <StudentNavbar user={user} isDarkTheme={isDarkTheme} onThemeToggle={onThemeToggle} onMenuToggle={() => setIsSidebarOpen(true)} onLogout={handleLogout} />
 
         <main className="px-4 py-6 sm:px-6 lg:px-8">
           <Outlet context={{ isDarkTheme }} />

@@ -23,23 +23,8 @@ export default function DashboardPage({ isDarkTheme, onThemeToggle }) {
   };
 
   return (
-    <DashboardShell
-      user={user}
-      roleConfig={roleConfig}
-      activeItemId={activeItemId}
-      isDarkTheme={isDarkTheme}
-      onThemeToggle={onThemeToggle}
-      onItemSelect={setActiveItemId}
-      onBackToSite={() => navigate("/")}
-      onLogout={handleLogout}
-    >
-      {({ isDarkTheme }) => (
-        <DashboardHome
-          user={user}
-          homeContent={roleConfig.home}
-          isDarkTheme={isDarkTheme}
-        />
-      )}
+    <DashboardShell user={user} roleConfig={roleConfig} activeItemId={activeItemId} isDarkTheme={isDarkTheme} onThemeToggle={onThemeToggle} onItemSelect={setActiveItemId} onBackToSite={() => navigate("/")} onLogout={handleLogout}>
+      {({ isDarkTheme }) => <DashboardHome user={user} homeContent={roleConfig.home} isDarkTheme={isDarkTheme} />}
     </DashboardShell>
   );
 }
