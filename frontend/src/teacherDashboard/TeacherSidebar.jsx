@@ -1,9 +1,10 @@
-import { BarChart3, BookOpen, Bot, ClipboardList, Home, LogOut, User, Users, X } from "lucide-react";
+import { BarChart3, BookOpen, Bot, CalendarDays, ClipboardList, Home, LogOut, User, Users, X } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import logoImage from "../assets/images/edumentor-logo-no-bg.png";
 
 const sidebarItems = [
   { label: "Dashboard", icon: Home, to: "/teacher", end: true },
+  { label: "Live Classes", icon: CalendarDays, to: "/teacher/live-classes" },
   { label: "Content", icon: BookOpen, to: "/teacher/content" },
   { label: "Assessments", icon: ClipboardList, to: "/teacher/assessments" },
   { label: "Students", icon: Users, to: "/teacher/students" },

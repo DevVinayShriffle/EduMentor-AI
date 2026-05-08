@@ -15,6 +15,7 @@ import StudentPayments from "./studentDashboard/StudentPayments";
 import StudentProfile from "./studentDashboard/StudentProfile";
 import TeacherDashboard from "./teacherDashboard/TeacherDashboard";
 import TeacherHome from "./teacherDashboard/TeacherHome";
+import TeacherLiveClasses from "./teacherDashboard/TeacherLiveClasses";
 import TeacherContent from "./teacherDashboard/TeacherContent";
 import TeacherAssessments from "./teacherDashboard/TeacherAssessments";
 import TeacherStudents from "./teacherDashboard/TeacherStudents";
@@ -51,6 +52,7 @@ export default function App() {
           </Route>
           <Route path="/teacher" element={<ProtectedRoute allowedRoles={["teacher"]}><TeacherDashboard isDarkTheme={isDarkTheme} onThemeToggle={() => setIsDarkTheme((current) => !current)} /></ProtectedRoute>}>
             <Route index element={<TeacherHome />} />
+            <Route path="live-classes" element={<TeacherLiveClasses />} />
             <Route path="content" element={<TeacherContent />} />
             <Route path="assessments" element={<TeacherAssessments />} />
             <Route path="students" element={<TeacherStudents />} />
