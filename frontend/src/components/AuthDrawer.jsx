@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
+import CustomSelect from "./CustomSelect";
 
 const initialLoginState = {
   email: "",
@@ -95,14 +96,19 @@ export default function AuthDrawer({ isOpen, mode, onClose, onModeChange, onSucc
               {mode === "signup" && (
                 <label className="block">
                   <span className="mb-2 block text-sm font-medium text-slate-200">You are a</span>
-                  <select value={signupForm.role} onChange={(event) => handleSignupChange("role", event.target.value)} className="w-full rounded-2xl border border-white/12 bg-white/8 px-4 py-3 text-sm text-white outline-none transition focus:border-blue-400 focus:bg-white/12">
-                    <option value="student" className="text-slate-900">
-                      Student
-                    </option>
-                    <option value="teacher" className="text-slate-900">
-                      Teacher
-                    </option>
-                  </select>
+                  <CustomSelect
+                    value={signupForm.role}
+                    onChange={(nextValue) => handleSignupChange("role", nextValue)}
+                    options={[
+                      { value: "student", label: "Student" },
+                      { value: "teacher", label: "Teacher" },
+                    ]}
+                    buttonClassName="w-full border-white/12 bg-white/8 text-white focus:border-blue-400 focus:bg-white/12"
+                    menuClassName="border-white/12 bg-slate-900/95 text-white backdrop-blur-xl"
+                    optionClassName="hover:bg-white/8"
+                    selectedOptionClassName="bg-white/10 text-blue-100"
+                    iconClassName="text-slate-300"
+                  />
                 </label>
               )}
 

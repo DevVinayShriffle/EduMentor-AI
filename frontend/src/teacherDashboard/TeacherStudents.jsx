@@ -1,7 +1,16 @@
+import { useState } from "react";
 import { useOutletContext } from "react-router-dom";
+import CustomSelect from "../components/CustomSelect";
 
 export default function TeacherStudents() {
   const { isDarkTheme } = useOutletContext();
+  const [selectedCourse, setSelectedCourse] = useState("All Courses");
+  const courseFilterOptions = [
+    { value: "All Courses", label: "All Courses" },
+    { value: "Class 12 Physics", label: "Class 12 Physics" },
+    { value: "NEET Chemistry", label: "NEET Chemistry" },
+    { value: "JEE Foundation Maths", label: "JEE Foundation Maths" },
+  ];
   const stats = [
     { label: "Total Students", value: "428" },
     { label: "Active This Week", value: "371" },
@@ -17,6 +26,10 @@ export default function TeacherStudents() {
   const cardClass = isDarkTheme ? "border-white/10 bg-[linear-gradient(180deg,rgba(15,23,42,0.82),rgba(17,24,39,0.9))] text-slate-100 shadow-[0_24px_70px_rgba(2,6,23,0.34)]" : "border-white/75 bg-white/92 text-slate-900 shadow-[0_20px_60px_rgba(37,99,235,0.08)]";
   const mutedClass = isDarkTheme ? "text-slate-300" : "text-slate-600";
   const accentClass = isDarkTheme ? "text-fuchsia-300" : "text-blue-700";
+  const selectButtonClass = isDarkTheme ? "border-white/10 bg-white/5 text-white" : "border-slate-200 bg-white text-slate-900";
+  const selectMenuClass = isDarkTheme ? "border-white/10 bg-slate-900/95 text-white backdrop-blur-xl" : "border-slate-200 bg-white text-slate-900";
+  const selectOptionClass = isDarkTheme ? "hover:bg-white/8" : "hover:bg-slate-50";
+  const selectSelectedClass = isDarkTheme ? "bg-white/10 text-fuchsia-100" : "bg-indigo-50 text-indigo-700";
 
   return (
     <div className="space-y-6">
@@ -29,12 +42,16 @@ export default function TeacherStudents() {
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
             <input type="text" placeholder="Search by student name" className={`rounded-2xl border px-4 py-3 text-sm outline-none ${isDarkTheme ? "border-white/10 bg-white/5 text-white placeholder:text-slate-400" : "border-slate-200 bg-white text-slate-900 placeholder:text-slate-400"}`} />
-            <select className={`rounded-2xl border px-4 py-3 text-sm outline-none ${isDarkTheme ? "border-white/10 bg-white/5 text-white" : "border-slate-200 bg-white text-slate-900"}`} defaultValue="All Courses">
-              <option>All Courses</option>
-              <option>Class 12 Physics</option>
-              <option>NEET Chemistry</option>
-              <option>JEE Foundation Maths</option>
-            </select>
+            <CustomSelect
+              value={selectedCourse}
+              onChange={setSelectedCourse}
+              options={courseFilterOptions}
+              buttonClassName={selectButtonClass}
+              menuClassName={selectMenuClass}
+              optionClassName={selectOptionClass}
+              selectedOptionClassName={selectSelectedClass}
+              iconClassName={isDarkTheme ? "text-slate-300" : "text-slate-500"}
+            />
           </div>
         </div>
       </section>
