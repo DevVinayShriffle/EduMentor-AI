@@ -4,6 +4,15 @@ import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import LandingPage from "./pages/LandingPage";
 import DashboardPage from "./Dashboard/Pages/DashboardPage";
+import StudentDashboard from "./studentDashboard/StudentDashboard";
+import StudentHome from "./studentDashboard/StudentHome";
+import StudentLearn from "./studentDashboard/StudentLearn";
+import StudentLiveClasses from "./studentDashboard/StudentLiveClasses";
+import StudentAiTutor from "./studentDashboard/StudentAiTutor";
+import StudentTests from "./studentDashboard/StudentTests";
+import StudentPerformance from "./studentDashboard/StudentPerformance";
+import StudentPayments from "./studentDashboard/StudentPayments";
+import StudentProfile from "./studentDashboard/StudentProfile";
 import TeacherDashboard from "./teacherDashboard/TeacherDashboard";
 import TeacherHome from "./teacherDashboard/TeacherHome";
 import TeacherContent from "./teacherDashboard/TeacherContent";
@@ -48,6 +57,26 @@ export default function App() {
               </ProtectedRoute>
             )}
           />
+          <Route
+            path="/student"
+            element={(
+              <ProtectedRoute allowedRoles={["student"]}>
+                <StudentDashboard
+                  isDarkTheme={isDarkTheme}
+                  onThemeToggle={() => setIsDarkTheme((current) => !current)}
+                />
+              </ProtectedRoute>
+            )}
+          >
+            <Route index element={<StudentHome />} />
+            <Route path="learn" element={<StudentLearn />} />
+            <Route path="live-classes" element={<StudentLiveClasses />} />
+            <Route path="ai-tutor" element={<StudentAiTutor />} />
+            <Route path="tests" element={<StudentTests />} />
+            <Route path="performance" element={<StudentPerformance />} />
+            <Route path="payments" element={<StudentPayments />} />
+            <Route path="profile" element={<StudentProfile />} />
+          </Route>
           <Route
             path="/teacher"
             element={(
