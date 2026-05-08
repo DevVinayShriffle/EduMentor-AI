@@ -4,6 +4,14 @@ import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import LandingPage from "./pages/LandingPage";
 import DashboardPage from "./Dashboard/Pages/DashboardPage";
+import TeacherDashboard from "./teacherDashboard/TeacherDashboard";
+import TeacherHome from "./teacherDashboard/TeacherHome";
+import TeacherContent from "./teacherDashboard/TeacherContent";
+import TeacherAssessments from "./teacherDashboard/TeacherAssessments";
+import TeacherStudents from "./teacherDashboard/TeacherStudents";
+import TeacherReports from "./teacherDashboard/TeacherReports";
+import TeacherChatbot from "./teacherDashboard/TeacherChatbot";
+import TeacherProfile from "./teacherDashboard/TeacherProfile";
 
 export default function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(() => {
@@ -40,6 +48,25 @@ export default function App() {
               </ProtectedRoute>
             )}
           />
+          <Route
+            path="/teacher"
+            element={(
+              <ProtectedRoute allowedRoles={["teacher"]}>
+                <TeacherDashboard
+                  isDarkTheme={isDarkTheme}
+                  onThemeToggle={() => setIsDarkTheme((current) => !current)}
+                />
+              </ProtectedRoute>
+            )}
+          >
+            <Route index element={<TeacherHome />} />
+            <Route path="content" element={<TeacherContent />} />
+            <Route path="assessments" element={<TeacherAssessments />} />
+            <Route path="students" element={<TeacherStudents />} />
+            <Route path="reports" element={<TeacherReports />} />
+            <Route path="chatbot" element={<TeacherChatbot />} />
+            <Route path="profile" element={<TeacherProfile />} />
+          </Route>
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
