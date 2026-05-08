@@ -15,7 +15,7 @@ import { useAuth } from "../context/AuthContext";
 
 export default function LandingPage({ isDarkTheme, onThemeToggle }) {
   const navigate = useNavigate();
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, logout, user } = useAuth();
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [authMode, setAuthMode] = useState("login");
 
@@ -28,9 +28,9 @@ export default function LandingPage({ isDarkTheme, onThemeToggle }) {
     setIsAuthOpen(false);
   };
 
-  const handleAuthSuccess = () => {
+  const handleAuthSuccess = (nextUser) => {
     setIsAuthOpen(false);
-    navigate("/dashboard");
+    navigate(nextUser?.role === "teacher" ? "/teacher" : "/dashboard");
   };
 
   const handleLogout = async () => {
@@ -46,13 +46,13 @@ export default function LandingPage({ isDarkTheme, onThemeToggle }) {
         onThemeToggle={onThemeToggle}
         onLoginClick={() => openAuth("login")}
         onSignupClick={() => openAuth("signup")}
-        onDashboardClick={() => navigate("/dashboard")}
+        onDashboardClick={() => navigate(user?.role === "teacher" ? "/teacher" : "/dashboard")}
         onLogoutClick={handleLogout}
       />
       <Hero
         onGetStarted={() => {
           if (isAuthenticated) {
-            navigate("/dashboard");
+            navigate(user?.role === "teacher" ? "/teacher" : "/dashboard");
             return;
           }
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import DashboardShell from "../Components/DashboardShell";
 import DashboardHome from "./DashboardHome";
@@ -11,6 +11,10 @@ export default function DashboardPage({ isDarkTheme, onThemeToggle }) {
   const roleConfig = getRoleConfig(user?.role);
   const defaultActiveItemId = roleConfig.navigation[0]?.items[0]?.id || "dashboard-home";
   const [activeItemId, setActiveItemId] = useState(defaultActiveItemId);
+
+  if (user?.role === "teacher") {
+    return <Navigate to="/teacher" replace />;
+  }
 
   const handleLogout = async () => {
     await logout();

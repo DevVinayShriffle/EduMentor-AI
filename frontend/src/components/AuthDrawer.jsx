@@ -56,15 +56,17 @@ export default function AuthDrawer({ isOpen, mode, onClose, onModeChange, onSucc
     setErrorMessage("");
 
     try {
+      let nextUser;
+
       if (mode === "login") {
-        await login(loginForm);
+        nextUser = await login(loginForm);
       } else {
-        await signup(signupForm);
+        nextUser = await signup(signupForm);
       }
 
       setLoginForm(initialLoginState);
       setSignupForm(initialSignupState);
-      onSuccess();
+      onSuccess(nextUser);
     } catch (error) {
       setErrorMessage(error.message);
     }
