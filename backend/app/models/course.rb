@@ -6,6 +6,7 @@ class Course < ApplicationRecord
   has_one :syllabus, dependent: :destroy
   has_many :lessons, through: :syllabus
   has_many :media_files, as: :mediable, dependent: :destroy
+  has_many :live_classes, dependent: :destroy
 
   before_destroy :remove_cloudinary_assets
 

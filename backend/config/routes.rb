@@ -34,6 +34,17 @@ Rails.application.routes.draw do
       end
 
       get "/my-courses", to: "enrollments#my_courses"
+
+      resources :live_classes do
+        member do
+          patch :start
+          patch :end
+          patch :cancel
+
+          post :join
+          post :leave
+        end
+      end
     end
   end
 
