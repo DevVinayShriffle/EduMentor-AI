@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  live_class: one
+  user: one
+  joined_at: 2026-05-08 12:40:44
+  left_at: 2026-05-08 12:40:44
+  duration_seconds: 1
+
+two:
+  live_class: two
+  user: two
+  joined_at: 2026-05-08 12:40:44
+  left_at: 2026-05-08 12:40:44
+  duration_seconds: 1

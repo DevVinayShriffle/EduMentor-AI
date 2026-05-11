@@ -1,6 +1,7 @@
 class Lesson < ApplicationRecord
   belongs_to :syllabus
   has_many :media_files, as: :mediable, dependent: :destroy
+  has_many :live_classes, dependent: :nullify
 
   enum :lesson_type, {concept: 0, practice: 1, revision: 2, test_discussion: 3, doubt_session: 4}
   enum :status, {draft: 0, published: 1, archived: 2}

@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  course: one
+  lesson: one
+  teacher: one
+  title: MyString
+  description: MyText
+  scheduled_start_time: 2026-05-08 12:39:40
+  scheduled_end_time: 2026-05-08 12:39:40
+  started_at: 2026-05-08 12:39:40
+  ended_at: 2026-05-08 12:39:40
+  status: 1
+  room_name: MyString
+  meeting_provider: MyString
+  recording_enabled: false
+
+two:
+  course: two
+  lesson: two
+  teacher: two
+  title: MyString
+  description: MyText
+  scheduled_start_time: 2026-05-08 12:39:40
+  scheduled_end_time: 2026-05-08 12:39:40
+  started_at: 2026-05-08 12:39:40
+  ended_at: 2026-05-08 12:39:40
+  status: 1
+  room_name: MyString
+  meeting_provider: MyString
+  recording_enabled: false

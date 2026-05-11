@@ -12,10 +12,11 @@ import Footer from "../sections/Footer";
 import Header from "../sections/Header";
 import AuthDrawer from "../components/AuthDrawer";
 import { useAuth } from "../context/AuthContext";
+import { getAppHomePath } from "../utils/getAppHomePath";
 
 export default function LandingPage({ isDarkTheme, onThemeToggle }) {
   const navigate = useNavigate();
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, logout, user } = useAuth();
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [authMode, setAuthMode] = useState("login");
 
@@ -28,9 +29,9 @@ export default function LandingPage({ isDarkTheme, onThemeToggle }) {
     setIsAuthOpen(false);
   };
 
-  const handleAuthSuccess = () => {
+  const handleAuthSuccess = (nextUser) => {
     setIsAuthOpen(false);
-    navigate("/dashboard");
+    navigate(getAppHomePath(nextUser?.role));
   };
 
   const handleLogout = async () => {
@@ -40,19 +41,11 @@ export default function LandingPage({ isDarkTheme, onThemeToggle }) {
   return (
     <div className={isDarkTheme ? "landing-theme-dark bg-slate-950 text-slate-100" : "bg-white text-gray-900"}>
       <Header isDarkTheme={isDarkTheme} />
-      <Navbar
-        isAuthenticated={isAuthenticated}
-        isDarkTheme={isDarkTheme}
-        onThemeToggle={onThemeToggle}
-        onLoginClick={() => openAuth("login")}
-        onSignupClick={() => openAuth("signup")}
-        onDashboardClick={() => navigate("/dashboard")}
-        onLogoutClick={handleLogout}
-      />
+      <Navbar isAuthenticated={isAuthenticated} isDarkTheme={isDarkTheme} onThemeToggle={onThemeToggle} onLoginClick={() => openAuth("login")} onSignupClick={() => openAuth("signup")} onDashboardClick={() => navigate(getAppHomePath(user?.role))} onLogoutClick={handleLogout} />
       <Hero
         onGetStarted={() => {
           if (isAuthenticated) {
-            navigate("/dashboard");
+            navigate(getAppHomePath(user?.role));
             return;
           }
 
@@ -69,13 +62,7 @@ export default function LandingPage({ isDarkTheme, onThemeToggle }) {
       <MobileApp />
       <Contact />
       <Footer />
-      <AuthDrawer
-        isOpen={isAuthOpen}
-        mode={authMode}
-        onClose={closeAuth}
-        onModeChange={setAuthMode}
-        onSuccess={handleAuthSuccess}
-      />
+      <AuthDrawer isOpen={isAuthOpen} mode={authMode} onClose={closeAuth} onModeChange={setAuthMode} onSuccess={handleAuthSuccess} />
     </div>
   );
 }
