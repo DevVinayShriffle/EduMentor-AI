@@ -40,6 +40,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<LandingPage isDarkTheme={isDarkTheme} onThemeToggle={() => setIsDarkTheme((current) => !current)} />} />
           <Route path="/dashboard" element={<ProtectedRoute allowedRoles={["admin"]}><DashboardPage isDarkTheme={isDarkTheme} onThemeToggle={() => setIsDarkTheme((current) => !current)} /></ProtectedRoute>} />
+
           <Route path="/student" element={<ProtectedRoute allowedRoles={["student"]}><StudentDashboard isDarkTheme={isDarkTheme} onThemeToggle={() => setIsDarkTheme((current) => !current)} /></ProtectedRoute>}>
             <Route index element={<StudentHome />} />
             <Route path="learn" element={<StudentLearn />} />
@@ -50,6 +51,7 @@ export default function App() {
             <Route path="payments" element={<StudentPayments />} />
             <Route path="profile" element={<StudentProfile />} />
           </Route>
+
           <Route path="/teacher" element={<ProtectedRoute allowedRoles={["teacher"]}><TeacherDashboard isDarkTheme={isDarkTheme} onThemeToggle={() => setIsDarkTheme((current) => !current)} /></ProtectedRoute>}>
             <Route index element={<TeacherHome />} />
             <Route path="live-classes" element={<TeacherLiveClasses />} />
@@ -60,6 +62,7 @@ export default function App() {
             <Route path="chatbot" element={<TeacherChatbot />} />
             <Route path="profile" element={<TeacherProfile />} />
           </Route>
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
